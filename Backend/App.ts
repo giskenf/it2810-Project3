@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 mongoose
-    .connect('mongodb://myusername:mypassword@it2810-76.idi.ntnu.no:27017/test?authSource=test&readPreference=primary&appname=MongoDB%20Compass&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
+    .connect('mongodb://myusername:mypassword@it2810-76.idi.ntnu.no:27017/mytestdatabase?authSource=mytestdatabase&readPreference=primary&appname=MongoDB%20Compass&ssl=false', { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
@@ -25,7 +25,12 @@ const TestSchema = mongoose.Schema({
     name: String,
 })
 
-mongoose.model('TestModel', TestSchema);
+const TestModel = mongoose.model('TestModel', TestSchema);
+
+console.log('funker som faen');
+//const small = new Tank({ size: 'small' })
+TestModel.create({ id: 1, name:'markus' });
+
 
 
 //module.exports = TestModel = db.model('TestModel', TestSchema)
