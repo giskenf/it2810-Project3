@@ -21,7 +21,7 @@ db.once("open", function() {
 });
 
 //importere routes
-const playerRoutes = require("./routes/players");
+const playerRoutes = require("./routes/players.ts");
 app.use("/players", playerRoutes);
 
 //Forsøk på la lage et schema i databasen (funker ikke):

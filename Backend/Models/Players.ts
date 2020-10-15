@@ -1,4 +1,3 @@
-export {};
 const mongoose = require("mongoose");
 
 const PlayerSchema = mongoose.Schema({
@@ -8,3 +7,5 @@ const PlayerSchema = mongoose.Schema({
   goalsScored: Number,
   assists: Number,
 });
+
+module.exports = mongoose.model("Player", PlayerSchema);

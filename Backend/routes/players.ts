@@ -1,7 +1,6 @@
-export {}; //using TypeScript modules to solve problem regarding redeclaring express
 const express = require("express");
-const router = express.router();
-const Players = require("../models/Players");
+const router = express.Router();
+const Players = require("../models/Players.ts");
 
 //get all
 router.get("/", async (req, res) => {
