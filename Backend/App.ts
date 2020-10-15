@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 mongoose
@@ -30,9 +32,12 @@ const TestSchema = mongoose.Schema({
   name: String,
 });
 
-const TestModel = mongoose.model("TestModel", TestSchema);
+app.listen(8000, () => console.log("running"));
 
+//const TestModel = mongoose.model("TestModel", TestSchema);
+/*
 //const small = new Tank({ size: 'small' })
 TestModel.create({ id: 1, name: "markus" });
 
 //module.exports = TestModel = db.model('TestModel', TestSchema)
+*/

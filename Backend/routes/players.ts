@@ -14,9 +14,9 @@ router.get("/", async (req, res) => {
 
 //get one
 
-router.get("/:id", async (req, res) => {
+router.get("/:_id", async (req, res) => {
   try {
-    const player = Players.findById(req.params.id);
+    const player = Players.findById(req.params._id);
     if (player == null) {
       return res.json({ message: "Kunne ikke finne spilleren" });
     }
