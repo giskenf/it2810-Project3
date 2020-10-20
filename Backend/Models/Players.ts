@@ -8,4 +8,4 @@ const PlayerSchema = mongoose.Schema({
   assists: Number,
 });
 
-module.exports = mongoose.model("Player", PlayerSchema);
+module.exports = mongoose.model("players", PlayerSchema);

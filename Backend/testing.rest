@@ -1,0 +1,8 @@
+
+
+GET http://localhost:8000/players/
+
+###
+
+
+GET http://localhost:8000/players/5f85a6f563d07c0d902a660d
