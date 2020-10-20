@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const PlayerSchema = mongoose.Schema({
-  id: Number,
-  firstName: String,
-  lastName: String,
-  goalsScored: Number,
+  id: String,
+  first_name: String,
+  last_name: String,
+  goals_scored: Number,
   assists: Number,
 });
 
