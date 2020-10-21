@@ -1,6 +1,5 @@
-import {createStore, Store} from "redux";
+/*import {createStore, Store} from "redux";
 import {PlayerList} from "../components/PlayerList";
-
 export type Player = {
     id: number;
     firstName: string;
@@ -8,11 +7,9 @@ export type Player = {
     goalsScored: number;
     assists: number;
 }
-
 export type AppState ={
     players: Player[]
 }
-
 const initialPlayer = {
     id: 1,
     firstName: "Jonas",
@@ -21,9 +18,6 @@ const initialPlayer = {
     assists: 0,
     shown: false
 }
-
-
-
 const reducer = (state=initialPlayer,action:any) => {
     switch (action.type){
         case "ADD":
@@ -41,29 +35,34 @@ const reducer = (state=initialPlayer,action:any) => {
     }
     return state;
 }
-
-
 export const store = createStore(reducer)
 //preloaded state: undefined
-
 store.subscribe(() => {
     console.log("Store updated",store.getState())
 })
-
-
 store.dispatch({
     type: "HIDE",
     payload: 10
 })
-
-
-/*
-
 function configureStore(): Store<AppState> {
     const store = createStore(reducer, []);
     return store;
 }
 //Oppretter en store
 export const store = configureStore();
-
  */
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
+import {composeWithDevTools} from 'redux-devtools-extension'
+
+import rootReducer from './reducers'
+
+const initalState = {
+
+}
+
+const middleware = [thunk]
+
+const store = createStore(rootReducer, initalState, composeWithDevTools(applyMiddleware(...middleware)));
+
+export default store;
