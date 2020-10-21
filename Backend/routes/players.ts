@@ -14,15 +14,17 @@ router.get("/", async (req, res) => {
 
 //get one
 
-router.get("/:id", async (req, res) => {
+router.get("/:_id", async (req, res) => {
   try {
-    const player = Players.findById(req.params.id);
-    res.send(res.player.firstName);
+
+    const player = await Players.findById(req.params._id);
     if (player == null) {
       return res.json({ message: "Kunne ikke finne spilleren" });
+    } else {
+      res.json(player);
     }
   } catch (err) {
-    res.json({ message: err });
+    console.log(res.json({ message: err }));
   }
 });
 
@@ -49,3 +51,4 @@ module.exports = router;
     }
 
 }); */
+

@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
+import {Page} from "./components/Player";
 //import {store} from "./store/store";
 //import {Provider} from "react-redux"
-import {PlayerList} from "./components/PlayerList";
+
 
 const { Provider } = require('react-redux');
 
@@ -13,7 +14,7 @@ function App() {
       <div className="App">
         <h1>Test</h1>
           <div className='playerContentContainer'>
-              <PlayerList/>
+              <Page/>
           </div>
       </div>
     </>

@@ -1,47 +1,112 @@
-import {createStore, Store} from "redux";
-import {PlayerList} from "../components/PlayerList";
+import {combineReducers, createStore, Store} from "redux";
+//import {PlayerList} from "../components/PlayerList";
 
 export type Player = {
     id: number;
     firstName: string;
-    lastName: string;
-    goalsScored: number;
-    assists: number;
+    lastName?: string;
+    goalsScored?: number;
+    assists?: number;
 }
 
 export type AppState ={
     players: Player[]
 }
 
-const initialPlayer = {
-    id: 1,
-    firstName: "Jonas",
-    lastName: "Blake",
-    goalsScored: 10,
-    assists: 0,
-    shown: false
+export function addPlayer(firstName: string) {
+    return {
+        type: "AddPlayer",
+        payload: firstName,
+    } as const;
 }
 
+export function removePlayer(id: number) {
+    return {
+        type: "RemovePlayer",
+        payload: id,
+    } as const;
+}
 
+type Actions =
+    | ReturnType<typeof addPlayer>
+    | ReturnType<typeof removePlayer>;
 
-const reducer = (state=initialPlayer,action:any) => {
-    switch (action.type){
-        case "ADD":
-            state = {...state, goalsScored: state.goalsScored + action.payload};
-            break;
-        case "SHOW":
-            console.log('Vise spilllere')
-            state = {...state, shown: true};
-            break
-        case "HIDE":
-            console.log('Skul spillere')
-            state = {...state, shown: false};
-            break
-        //default: return state;
+export function playerReducer(
+    state: Player[] = [],
+    action: Actions
+) {
+    switch (action.type) {
+        case "AddPlayer":
+            return state.concat({
+                id: state.length + 1,
+                firstName: action.payload,
+            });
+        case "RemovePlayer":
+            return state.filter(
+                (person) => person.id !== action.payload
+            );
+        default:
+            neverReached(action);
     }
     return state;
 }
 
+function neverReached(never: never) {}
+
+const rootReducer = combineReducers<AppState>({
+    players: playerReducer,
+});
+
+function configureStore(): Store<AppState> {
+    const store =  createStore(
+        rootReducer,
+        undefined
+    );
+    return store;
+}
+
+export const store = configureStore();
+
+
+
+
+
+
+
+//-----------------------------
+
+
+export function showPlayer(id: string){
+    return{
+        type: "SHOW_PLAYER",
+        payload: id
+    } as const;
+}
+export function hidePlayer(id: string){
+    return{
+        type: "HIDE_PLAYER",
+        payload: id
+    } as const;
+}
+
+
+export const reducer = (state={},action:any) => {
+    switch (action.type){
+        case "SHOW":
+            console.log('Vise spilllere')
+            state = {...state, show: true};
+            break
+        case "HIDE":
+            console.log('Skul spillere')
+            state = {...state, show: false};
+            break
+        default: return state;
+    }
+}
+
+
+
+/*
 
 export const store = createStore(reducer)
 //preloaded state: undefined
@@ -56,6 +121,8 @@ store.dispatch({
     payload: 10
 })
 
+
+ */
 
 /*
 

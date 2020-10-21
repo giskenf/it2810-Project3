@@ -1,11 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+
+const { useSelector, useDispatch } = require('react-redux')
+
+function PlayerList () {
 
 
-export const PlayerList = () => {
+    //const player = useSelector(state => "test");
+    const dispatch = useDispatch();
 
-    return (
-        <div>
-            Liste med spillere
-        </div>
-    )
+
+
 }
+
+
