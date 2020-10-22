@@ -12,13 +12,14 @@ export type playerAbility = {
     id: string
     first_name: string
     second_name: string
-    //ikke mer alle feltene
+    //ikke med alle feltene
 }
 
 //PokemonSuccess
 export interface GetPlayers{
     type: typeof GET_PLAYERS
-    payload: PlayerType
+    payload: playerAbility
+    //payload: playerAbility
 }
 
 export interface PlayersLoading{

@@ -19,8 +19,12 @@ function App() {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
     const handleSubmit = () => dispatch(GetPlayers(playerName));
 
+
+
     console.log(playerName)
-    console.log(playerState.player)
+    console.log("test")
+    console.log(playerState)
+    console.log(typeof playerState.player)
 
     return (
     <>
@@ -32,7 +36,7 @@ function App() {
           <button onClick={handleSubmit}>Search</button>
           {playerState.player && (
               <div>
-                  <p>{playerState.player.playerabilities}</p>
+                  <p>{playerState.player.first_name}</p>
               </div>
           )}
           {/*<Players getPlayers={()=>1} players={()=>1}/>*/}

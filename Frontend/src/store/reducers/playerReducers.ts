@@ -1,4 +1,4 @@
-import {GET_PLAYERS, PlayerDispatchTypes, PLAYERS_ERROR, PLAYERS_LOADING, PlayerType} from '../types'
+import {GET_PLAYERS, PlayerDispatchTypes, PLAYERS_ERROR, PLAYERS_LOADING, PlayerType,playerAbility} from '../types'
 
 /*const initialState = {
     players:[],
@@ -24,7 +24,8 @@ export default function(state = initialState, action: any){
 
 interface DefaultStateI {
     loading: boolean,
-    player?: PlayerType
+    //player?: PlayerType
+    player?: playerAbility
 }
 
 const defaultState: DefaultStateI = {
