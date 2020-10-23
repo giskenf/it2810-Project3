@@ -9,9 +9,18 @@ export type PlayerType = {
 
 
 export type playerAbility = {
+
     id: string
     first_name: string
     second_name: string
+    news: string
+    goals_scored: number
+    assists: number
+    clean_sheets: number
+    own_goals: number
+    yellow_cards: number
+    red_cards: number
+    team: string
     //ikke med alle feltene
 }
 

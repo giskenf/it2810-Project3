@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 //get one
-
+/*
 router.get("/:_id", async (req, res) => {
   try {
 
@@ -27,6 +27,26 @@ router.get("/:_id", async (req, res) => {
     console.log(res.json({ message: err }));
   }
 });
+
+
+ */
+router.get("/:team", async (req, res) => {
+  try {
+
+    //const player = await Players.find(req.params.first_name);
+    const player = await Players.find({team:req.params.team})
+    if (player == null) {
+      return res.json({ message: "Kunne ikke finne spilleren" });
+    } else {
+      res.json(player);
+    }
+  } catch (err) {
+    console.log(res.json({ message: err }));
+  }
+});
+
+
+
 
 module.exports = router;
 

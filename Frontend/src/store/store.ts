@@ -57,15 +57,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 
 import rootReducer from './reducers'
 
-const initalState = {
 
-}
-
-const middleware = [thunk]
-const store = createStore(rootReducer, initalState, composeWithDevTools(applyMiddleware(...middleware)));
-
-
-//Fra video
 const Sstore = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export type RootStore = ReturnType<typeof rootReducer>
