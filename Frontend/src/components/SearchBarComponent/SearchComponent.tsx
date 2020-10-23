@@ -8,19 +8,24 @@ export const SearchBarComponent: React.FC = () => {
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("")
     const playerState = useSelector((state: RootStore) => state.players)
+
+
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
     const handleSubmit = () => dispatch(GetPlayers(playerName));
 
-    console.log(playerState)
-    console.log(playerName)
+    console.log(playerState.player)
+    playerState?.player?.map(player=>console.log(player?.first_name))
+    //console.log(playerName)
 
     return (
+
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button id="searchButton" onClick={handleSubmit}>Search</Button>
             {playerState.player && (
                 <div>
-                    <p>{playerState.player.team}</p>
+                    <p>{playerState?.player?.map(player=>player?.first_name)}</p>
                 </div>
             )}
         </>

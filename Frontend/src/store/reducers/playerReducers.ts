@@ -4,7 +4,7 @@ import {GET_PLAYERS, PlayerDispatchTypes, PLAYERS_ERROR, PLAYERS_LOADING, Player
 interface DefaultStateI {
     loading: boolean,
     //player?: PlayerType
-    player?: playerAbility
+    player?: playerAbility[]
 }
 
 const defaultState: DefaultStateI = {

@@ -32,9 +32,10 @@ router.get("/:_id", async (req, res) => {
  */
 router.get("/:team", async (req, res) => {
   try {
-
+    console.log(req.params);
     //const player = await Players.find(req.params.first_name);
     const player = await Players.find({team:req.params.team})
+
     if (player == null) {
       return res.json({ message: "Kunne ikke finne spilleren" });
     } else {

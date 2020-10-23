@@ -21,13 +21,11 @@ export type playerAbility = {
     yellow_cards: number
     red_cards: number
     team: string
-    //ikke med alle feltene
 }
 
-//PokemonSuccess
 export interface GetPlayers{
     type: typeof GET_PLAYERS
-    payload: playerAbility
+    payload: playerAbility[]
     //payload: playerAbility
 }
 
