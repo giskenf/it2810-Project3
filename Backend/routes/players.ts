@@ -5,7 +5,17 @@ const Players = require("../models/Players.ts");
 //get all
 router.get("/", async (req, res) => {
   try {
-    const players = await Players.find();
+    const name = req.query.name; //Hvordan skal vi søke etter de forskjellige kombinasjonene av navn
+    const teamIn = req.query.team; //req.query.team;
+    //const goals_scored = req.query.goals_scored;
+    const sort = {};
+    const limit = 0;
+    const filter = {
+      name: { $regex: name, $options: "i" },
+      team: { $regex: "", $options: "i" },
+    };
+
+    const players = await Players.find(filter);
     res.json(players);
   } catch (err) {
     res.json({ message: err });
@@ -16,8 +26,8 @@ router.get("/", async (req, res) => {
 /*
 router.get("/:_id", async (req, res) => {
   try {
-
     const player = await Players.findById(req.params._id);
+    res.json(player);
     if (player == null) {
       return res.json({ message: "Kunne ikke finne spilleren" });
     } else {
@@ -27,30 +37,9 @@ router.get("/:_id", async (req, res) => {
     console.log(res.json({ message: err }));
   }
 });
-
-
- */
-router.get("/:team", async (req, res) => {
-  try {
-    console.log(req.params);
-    //const player = await Players.find(req.params.first_name);
-    const player = await Players.find({team:req.params.team})
-
-    if (player == null) {
-      return res.json({ message: "Kunne ikke finne spilleren" });
-    } else {
-      res.json(player);
-    }
-  } catch (err) {
-    console.log(res.json({ message: err }));
-  }
-});
-
-
-
+*/
 
 module.exports = router;
-
 
 //get all
 

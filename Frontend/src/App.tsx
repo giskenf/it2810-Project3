@@ -20,7 +20,6 @@ function App() {
           <HeaderComponent />
           <FrontPageComponent>
           </FrontPageComponent>
-          <CustomizedDialogs/>
           <FooterComponent />
       </div>
     </>
