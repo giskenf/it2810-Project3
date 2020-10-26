@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
 import {GetPlayers} from "../../store/actions/playersAction";
+import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
 import rootReducer from "../../store/reducers";
+
 
 
 
@@ -20,12 +22,11 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const handleSubmit = () => dispatch(GetPlayers(playerName,""));
 
 
-    console.log(playerState)
-
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button id="searchButton" onClick={handleSubmit}>Search</Button>
+            <DropDownComponent />
             <SearchContainer>
 
             {playerState.player && (
@@ -49,7 +50,9 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                 </ul>
             )}
 
+
             </SearchContainer>
+
 
         </>
     );

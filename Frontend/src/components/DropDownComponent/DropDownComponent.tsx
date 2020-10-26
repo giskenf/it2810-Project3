@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import styled from 'styled-components';
-import {SearchBarComponent} from "../SearchBarComponent/SearchComponent";
-import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
-import {PlayerList} from "../PlayerList";
-import Select from "react-select";
-
+import Select from 'react-select';
+//import { ValueType, OptionType } from "react-select";
 
 const options = [
     { value: 'Arsenal', label: 'Arsenal' },
@@ -24,26 +21,31 @@ const options = [
     { value: 'Sheffield United', label: 'Sheffield United' },
     { value: 'Southampton', label: 'Southampton' },
     { value: 'Tottenham', label: 'Totteham' },
-    { value: 'Sheffield United', label: 'Sheffield United' },
-    { value: 'Southampton', label: 'Southampton' },
+    { value: 'West Bromwich', label: 'West Bromwich'},
+    { value: 'West Ham', label: 'West Ham' },
+    { value: 'Wolverhampton', label: 'Wolverhampton' },
 
 ];
 
-export const FrontPageComponent: React.FC = () => {
-    return(
+export const DropDownComponent: React.FC = () => {
+    const [team, setTeam] = useState(options[0])
+    const handleChange = (selectedOption: any) => {
+        setTeam(selectedOption.value);
+        console.log(selectedOption);
+    };
+
+    return (
         <>
-            <FrontPageContainer>
-                <SearchBarComponent />
-            </FrontPageContainer>
+            <Select className="select"
+                    //defaultValue = {options[0]}
+                    classNamePrefix="react-select"
+                    options={options}
+                    placeholder={'Choose a team'}
+                    onChange={handleChange}
+            />
         </>
     )
 };
 
-const FrontPageContainer = styled.div<{ }>`
-  display: flex;
-  flex-direction: row;
-  background-color: white;
-  justify-content: center; 
-  flex-wrap: wrap;
-  padding: 30px;
-`;
+
+
