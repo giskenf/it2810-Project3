@@ -6,13 +6,13 @@ const Players = require("../models/Players.ts");
 router.get("/", async (req, res) => {
   try {
     const name = req.query.name; //Hvordan skal vi søke etter de forskjellige kombinasjonene av navn
-    const teamIn = req.query.teamIn; //req.query.team;
+    const teamIn = req.query.team; //req.query.team;
     //const goals_scored = req.query.goals_scored;
     const sort = {};
     const limit = 0;
     const filter = {
-      first_name: { $regex: name, $options: "i" },
-      //team: { $regex: teamIn, $options: "i" },
+      name: { $regex: name, $options: "i" },
+      team: { $regex: "", $options: "i" },
     };
 
     const players = await Players.find(filter);

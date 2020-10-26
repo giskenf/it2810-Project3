@@ -11,8 +11,7 @@ export type PlayerType = {
 export type playerAbility = {
 
     _id: string
-    first_name: string
-    second_name: string
+    name: string
     news: string
     goals_scored: number
     assists: number

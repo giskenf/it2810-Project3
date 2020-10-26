@@ -71,11 +71,11 @@ export function PopUp(props: any) {
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                {props.first_name + " " + props.second_name}
+                {props.name}
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    {props.first_name + " " + props.second_name}
+                    {props.name}
                 </DialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
@@ -94,7 +94,7 @@ export function PopUp(props: any) {
                     </Typography>
                     <Typography gutterBottom>
                         <h5>News</h5>
-                        {props.news}
+                        {(props.news.length > 0)? ( props.news):"Nothing to report."}
 
                     </Typography>
                 </DialogContent>

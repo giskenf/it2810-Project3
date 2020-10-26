@@ -17,7 +17,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
-    const handleSubmit = () => dispatch(GetPlayers(playerName));
+    const handleSubmit = () => dispatch(GetPlayers(playerName,""));
 
 
     console.log(playerState)
@@ -33,8 +33,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                     {playerState?.player?.map((player)=> {
                         return (
                             <PopUp  key={player._id}
-                                    first_name={player?.first_name}
-                                    second_name={player?.second_name}
+                                    name={player?.name}
                                     goals_conceded={player?.goals_scored}
                                     goals_scored={player?.goals_scored}
                                     assists={player?.assists}

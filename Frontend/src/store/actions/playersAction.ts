@@ -4,7 +4,8 @@ import axios from 'axios'
 
 export const GetPlayers = (
 
-    first_name: string,
+    name: string,
+    team: string
 
     ) => async (dispatch:Dispatch<PlayerDispatchTypes>) => {
 
@@ -17,7 +18,7 @@ export const GetPlayers = (
             type: PLAYERS_LOADING
         })
 
-        const res = await axios.get(`http://localhost:8000/players/${first_name}`);
+        const res = await axios.get(`http://localhost:8000/players/?name=${name}&team=""`);
 
         dispatch({
             type: GET_PLAYERS,
