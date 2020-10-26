@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
 import {GetPlayers} from "../../store/actions/playersAction";
+import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 
 
 export const SearchBarComponent: React.FC = () => {
@@ -12,13 +13,11 @@ export const SearchBarComponent: React.FC = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
     const handleSubmit = () => dispatch(GetPlayers(playerName));
 
-
-
-
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button id="searchButton" onClick={handleSubmit}>Search</Button>
+            <DropDownComponent />
             <SearchContainer>
             {playerState.player && (
                 <ul style={{listStyleType: "none"}}>
@@ -30,8 +29,6 @@ export const SearchBarComponent: React.FC = () => {
                 </ul>
             )}
             </SearchContainer>
-
-
         </>
     );
 };
