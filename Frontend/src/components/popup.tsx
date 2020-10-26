@@ -8,6 +8,8 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import rootReducer from "../store/reducers";
+
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -29,7 +31,7 @@ export interface DialogTitleProps extends WithStyles<typeof styles> {
     onClose: () => void;
 }
 
-const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
+const DialogTitle = withStyles(styles)((props: any) => {
     const { children, classes, onClose, ...other } = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
@@ -56,7 +58,7 @@ const DialogActions = withStyles((theme: Theme) => ({
     },
 }))(MuiDialogActions);
 
-export function CustomizedDialogs() {
+export function PopUp(props: any) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -69,25 +71,31 @@ export function CustomizedDialogs() {
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                Open dialog
+                {props.first_name + " " + props.second_name}
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Modal title
+                    {props.first_name + " " + props.second_name}
                 </DialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                        in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                        <h4>Team: {props.team}</h4>
+
                     </Typography>
                     <Typography gutterBottom>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                        lacus vel augue laoreet rutrum faucibus dolor auctor.
+                        <p>Goals scored: {props.goals_scored}</p>
+                        <p>Assists: {props.assists}</p>
+                        <p>Goals conceded: {props.goals_conceded}</p>
+                        <p>Clean sheets: {props.clean_sheets}</p>
+                        <p>Red cards: {props.red_cards}</p>
+                        <p>Yellow cards: {props.yellow_cards}</p>
+
+
                     </Typography>
                     <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                        scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                        auctor fringilla.
+                        <h5>News</h5>
+                        {props.news}
+
                     </Typography>
                 </DialogContent>
                 <DialogActions>

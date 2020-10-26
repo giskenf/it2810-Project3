@@ -7,7 +7,7 @@ import {PlayerList} from "./components/PlayerList";
 import {HeaderComponent} from "./components/HeaderComponent/HeaderComponent";
 import {FooterComponent} from "./components/FooterComponent/FooterComponent";
 import {FrontPageComponent} from "./components/FrontPageComponent/FrontPageComponent";
-import {CustomizedDialogs} from "./components/popup";
+
 
 const { Provider } = require('react-redux');
 
@@ -19,7 +19,6 @@ function App() {
           <HeaderComponent />
           <FrontPageComponent>
           </FrontPageComponent>
-          <CustomizedDialogs/>
           <FooterComponent />
       </div>
     </>

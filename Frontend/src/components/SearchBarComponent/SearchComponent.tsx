@@ -3,9 +3,16 @@ import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
 import {GetPlayers} from "../../store/actions/playersAction";
+import {PopUp} from "../popup"
+import rootReducer from "../../store/reducers";
 
 
-export const SearchBarComponent: React.FC = () => {
+
+interface searchBarProps{
+    playerState: ReturnType<typeof rootReducer>
+}
+
+export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
@@ -13,24 +20,37 @@ export const SearchBarComponent: React.FC = () => {
     const handleSubmit = () => dispatch(GetPlayers(playerName));
 
 
-
+    console.log(playerState)
 
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button id="searchButton" onClick={handleSubmit}>Search</Button>
             <SearchContainer>
+
             {playerState.player && (
                 <ul style={{listStyleType: "none"}}>
                     {playerState?.player?.map((player)=> {
                         return (
-                            <li key={player.id} > {player?.first_name} {player?.second_name} {player?.goals_scored}</li>
+                            <PopUp  key={player._id}
+                                    first_name={player?.first_name}
+                                    second_name={player?.second_name}
+                                    goals_conceded={player?.goals_scored}
+                                    goals_scored={player?.goals_scored}
+                                    assists={player?.assists}
+                                    clean_sheets={player?.clean_sheets}
+                                    news={player?.news} own_goals={player.own_goals}
+                                    team={player?.team}
+                                    red_cards = {player?.red_cards}
+                                    yellow_cards={player?.yellow_cards}
+
+                            />
                         )
                     })}
                 </ul>
             )}
-            </SearchContainer>
 
+            </SearchContainer>
 
         </>
     );
