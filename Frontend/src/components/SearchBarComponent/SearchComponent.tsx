@@ -4,12 +4,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
 import {GetPlayers} from "../../store/actions/playersAction";
 
+
 export const SearchBarComponent: React.FC = () => {
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
     const handleSubmit = () => dispatch(GetPlayers(playerName));
+
+
+
 
     return (
         <>
@@ -26,6 +30,7 @@ export const SearchBarComponent: React.FC = () => {
                 </ul>
             )}
             </SearchContainer>
+
 
         </>
     );
