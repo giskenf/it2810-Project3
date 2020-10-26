@@ -1,6 +1,6 @@
 //import React, { Component , useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {getPlayers} from "../store/actions/playersAction";
+//import {getPlayers} from "../store/actions/playersAction";
 //import {getPlayers} from '../store/actions/playersAction';
 
 /*export const Players: React.FC = () => {
