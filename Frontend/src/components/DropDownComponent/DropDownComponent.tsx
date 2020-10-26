@@ -1,7 +1,6 @@
 import React, { useState }  from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-//import { ValueType, OptionType } from "react-select";
 
 const options = [
     { value: 'Arsenal', label: 'Arsenal' },

@@ -7,11 +7,8 @@ import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
 import rootReducer from "../../store/reducers";
 
-
-
-
 interface searchBarProps{
-    playerState: ReturnType<typeof rootReducer>
+    playerState?: ReturnType<typeof rootReducer>
 }
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
