@@ -29,5 +29,5 @@ const HeaderTextContainer = styled.div<{}>`
 `;
 
 const LogoContainer = styled.img<{}>`
-
+  max-width: 250px;
 `;

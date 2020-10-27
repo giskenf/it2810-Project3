@@ -8,6 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import { spacing } from '@material-ui/system';
 import rootReducer from "../store/reducers";
 
 
@@ -69,8 +70,8 @@ export function PopUp(props: any) {
     };
 
     return (
-        <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        <div >
+            <Button variant="outlined" color="primary" onClick={handleClickOpen} size="large" fullWidth={true}>
                 {props.name}
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
@@ -104,6 +105,7 @@ export function PopUp(props: any) {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <div/>
         </div>
     );
 }

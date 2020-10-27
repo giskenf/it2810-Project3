@@ -5,34 +5,36 @@ import {RootStore} from "../../store/store";
 import {GetPlayers} from "../../store/actions/playersAction";
 import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
+import {SortButton} from "../SortButtonComponent"
 import rootReducer from "../../store/reducers";
 
 
 
 
 interface searchBarProps{
-    playerState: ReturnType<typeof rootReducer>
+    playerState?: ReturnType<typeof rootReducer>
 }
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
     const [team, setTeam] = useState("")
+    const [sortVariable ,setSort] = useState("")
 
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
-    const handleSubmit = () => dispatch(GetPlayers(playerName,team));
-
-    console.log(playerState.player)
+    const handleSubmit = () => dispatch(GetPlayers(playerName,team,sortVariable));
 
 
+    
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button id="searchButton" onClick={handleSubmit}>Search</Button>
             <DropDownComponent changeTeam={setTeam} />
+            <SortButton sortBy={"name"} changeSort={setSort} />
+            <SortButton sortBy={"goals"} changeSort={setSort}/>
             <SearchContainer>
-
             {playerState.player && (
                 <ul style={{listStyleType: "none"}}>
                     {playerState?.player?.map((player)=> {
@@ -53,8 +55,6 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                     })}
                 </ul>
             )}
-
-
             </SearchContainer>
 
 
