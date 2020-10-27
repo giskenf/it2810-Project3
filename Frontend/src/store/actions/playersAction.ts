@@ -18,7 +18,7 @@ export const GetPlayers = (
             type: PLAYERS_LOADING
         })
 
-        const res = await axios.get(`http://localhost:8000/players/?name=${name}&team=""`);
+        const res = await axios.get(`http://localhost:8000/players/?name=${name}&team=${team}`);
 
         dispatch({
             type: GET_PLAYERS,

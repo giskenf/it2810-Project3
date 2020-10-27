@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     const limit = 0;
     const filter = {
       name: { $regex: name, $options: "i" },
-      team: { $regex: "", $options: "i" },
+      team: { $regex: teamIn, $options: "i" },
     };
 
     const players = await Players.find(filter);

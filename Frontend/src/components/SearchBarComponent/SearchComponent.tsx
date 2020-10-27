@@ -15,18 +15,22 @@ interface searchBarProps{
 }
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
+    const [team, setTeam] = useState("")
+
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
-    const handleSubmit = () => dispatch(GetPlayers(playerName,""));
+    const handleSubmit = () => dispatch(GetPlayers(playerName,team));
+
+    console.log(playerState.player)
 
 
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button id="searchButton" onClick={handleSubmit}>Search</Button>
-            <DropDownComponent />
+            <DropDownComponent changeTeam={setTeam} />
             <SearchContainer>
 
             {playerState.player && (
