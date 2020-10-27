@@ -7,18 +7,20 @@ export const GetPlayers = (
     name: string,
     team: string,
     sort: string,
-    hasSearched: boolean
+    hasSearched: boolean,
+    order: number
 
     ) => async (dispatch:Dispatch<PlayerDispatchTypes>) => {
-    console.log(hasSearched)
+    console.log("1")
     if(hasSearched)
 
         try{
             dispatch({
                 type: PLAYERS_LOADING
             })
-
-            const res = await axios.get(`http://localhost:8000/players/?name=${name}&team=${team}`);
+            console.log("2")
+            const res = await axios.get
+            (`http://localhost:8000/players/?name=${name}&team=${team}&sortingVariable=${sort}&sortingOrder=${order}`);
 
             dispatch({
                 type: GET_PLAYERS,

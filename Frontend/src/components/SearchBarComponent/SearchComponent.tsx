@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
@@ -6,6 +6,7 @@ import {GetPlayers} from "../../store/actions/playersAction";
 import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
 import rootReducer from "../../store/reducers";
+import PropTypes from 'prop-types';
 
 
 
@@ -15,18 +16,25 @@ interface searchBarProps{
 }
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
+    const [on, setOn] = useState(false);
     const [team, setTeam] = useState("");
     const [sort, setSort] = useState("");
+    const [order,setOrder] = useState(-1)
     const [hasSearched, setHasSearched] = useState(false);
 
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
-    const handleSubmit = () => dispatch(GetPlayers(playerName,team,sort,hasSearched));
+    const handleSubmit = () => dispatch(GetPlayers(playerName,team,sort,hasSearched,order));
 
+    const changeOrder = () =>{
+        if(order==-1)
+            setOrder(1)
+        else
+          setOrder(-1)
+    }
 
-    
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
@@ -35,8 +43,8 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             <Button onClick={()=>{
                 setSort("name");handleSubmit()}}>Sort by name</Button>
             <Button onClick={()=>{
-                setSort("goals_scored");handleSubmit()}}>Sort by goals scored</Button>
-            <Button>Sort descending</Button>
+                setSort("goalsScored");handleSubmit()}}>Sort by goals scored</Button>
+            <Button onClick={changeOrder}>Sort descending</Button>
 
             <SearchContainer>
             {playerState.player && (
@@ -83,12 +91,12 @@ const Input = styled.input<{}>`
   border: #3D195B solid;
 `;
 
-export const Button = styled.button<{}>`
+const Button = styled.button<{}>`
   border-radius: 0;
   padding: 10px;
   margin-left: 6px;
   border: #3D195B solid;
-  background-color: white;
+  background-color:white;
   transition: 0.3s;
   
   :hover{
