@@ -5,7 +5,8 @@ import axios from 'axios'
 export const GetPlayers = (
 
     name: string,
-    team: string
+    team: string,
+    sort: string
 
     ) => async (dispatch:Dispatch<PlayerDispatchTypes>) => {
 
