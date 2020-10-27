@@ -7,15 +7,26 @@ router.get("/", async (req, res) => {
   try {
     const name = req.query.name; //Hvordan skal vi søke etter de forskjellige kombinasjonene av navn
     const teamIn = req.query.team; //req.query.team;
-    //const goals_scored = req.query.goals_scored;
-    const sort = {};
-    const limit = 0;
+    let sort = {};
+
     const filter = {
       name: { $regex: name, $options: "i" },
       team: { $regex: teamIn, $options: "i" },
     };
 
-    const players = await Players.find(filter);
+    if (req.query.sortingVariable == "name") {
+      sort = {
+        name: req.query.sortingOrder,
+      };
+    } else if (req.query.sortingOrder == "goalsScored") {
+      sort = {
+        goals_scored: req.query.sortingOrder,
+      };
+    } else {
+      const sort = { null: null };
+    }
+
+    const players = await Players.find(filter).sort(sort);
     res.json(players);
   } catch (err) {
     res.json({ message: err });
