@@ -7,13 +7,11 @@ export const GetPlayers = (
     name: string,
     team: string,
     sort: string,
-    hasSearched: boolean,
+    //hasSearched?: boolean,
     order: number
 
     ) => async (dispatch:Dispatch<PlayerDispatchTypes>) => {
     console.log("1")
-    if(hasSearched)
-
         try{
             dispatch({
                 type: PLAYERS_LOADING

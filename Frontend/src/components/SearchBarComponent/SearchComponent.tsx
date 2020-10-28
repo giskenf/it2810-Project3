@@ -15,8 +15,9 @@ interface searchBarProps{
     playerState?: ReturnType<typeof rootReducer>
 }
 
+
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
-    const [on, setOn] = useState(false);
+
     const [team, setTeam] = useState("");
     const [sort, setSort] = useState("");
     const [order,setOrder] = useState(-1)
@@ -26,27 +27,39 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
-    const handleSubmit = () => dispatch(GetPlayers(playerName,team,sort,hasSearched,order));
 
+    const handleSubmit = (search:boolean) => {
+
+        if(search) {
+            if(!hasSearched)
+                setHasSearched(true)
+            dispatch(GetPlayers(playerName, team, sort, order));}
+        else if(hasSearched)
+            dispatch(GetPlayers(playerName, team, sort, order));
+    }
     const changeOrder = () =>{
         if(order==-1)
             setOrder(1)
         else
-          setOrder(-1)
+            setOrder(-1)
     }
+    //Grunnen til at jeg opprettet en ny knapp som heter Sort Data er fordi når man kaller på to funksjoner med en
+    //onClik, vil de ikke kalles i rekkefølge. Det gjorde at man må trykke to ganger for å feks sortere.
 
     return (
         <>
-            <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
-            <Button onClick={() =>{setHasSearched(true);handleSubmit()}}>Search</Button>
-            <DropDownComponent changeTeam={setTeam} />
-            <Button onClick={()=>{
-                setSort("name");handleSubmit()}}>Sort by name</Button>
-            <Button onClick={()=>{
-                setSort("goalsScored");handleSubmit()}}>Sort by goals scored</Button>
-            <Button onClick={changeOrder}>Sort descending</Button>
-
             <SearchContainer>
+            <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
+            <Button onClick={() =>{handleSubmit(true)}}>Search</Button>
+            <DropDownComponent changeTeam={setTeam} />
+            <ButtonContainer>
+                <Button onClick={()=>{setSort("name")}}>Sort by name</Button>
+                <Button onClick={()=>{setSort("goalsScored")}}>Sort by goals scored</Button>
+                <Button onClick={changeOrder}>Sort descending</Button>
+            </ButtonContainer>
+            <Button onClick={()=>handleSubmit(false)}>Sort Data</Button>
+
+
             {playerState.player && (
                 <ul style={{listStyleType: "none"}}>
                     {playerState?.player?.map((player)=> {
@@ -82,6 +95,7 @@ const SearchContainer = styled.div<{}>`
   flex-wrap: wrap; 
   width: 100%;
   justify-content: center; 
+  align-items: center;
 `;
 
 const Input = styled.input<{}>`
@@ -89,12 +103,14 @@ const Input = styled.input<{}>`
   margin: 0 0 0 30px;
   padding: 10px;
   border: #3D195B solid;
+  max-height: 40px;
 `;
 
 const Button = styled.button<{}>`
   border-radius: 0;
   padding: 10px;
   margin-left: 6px;
+  max-height: 50px;
   border: #3D195B solid;
   background-color:white;
   transition: 0.3s;
@@ -106,4 +122,10 @@ const Button = styled.button<{}>`
   :active{
     background-color: black;
   }
+`;
+const ButtonContainer = styled.div<{}>`
+  display: flex;
+  flex-direction:column;
+  flex-wrap: wrap; 
+  justify-content: center; 
 `;
