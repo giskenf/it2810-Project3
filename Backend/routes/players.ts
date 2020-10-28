@@ -26,7 +26,11 @@ router.get("/", async (req, res) => {
       const sort = { null: null };
     }
 
-    const players = await Players.find(filter).sort(sort);
+    const players = await Players.find(filter)
+        .sort(sort)
+        .limit(15);
+    console.log(players)
+    console.log(players)
     res.json(players);
   } catch (err) {
     res.json({ message: err });

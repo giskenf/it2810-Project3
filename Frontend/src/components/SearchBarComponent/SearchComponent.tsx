@@ -7,13 +7,16 @@ import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
 import rootReducer from "../../store/reducers";
 import PropTypes from 'prop-types';
-
-
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface searchBarProps{
     playerState?: ReturnType<typeof rootReducer>
+    index?: number;
+    setIndex?(id: number): void;
 }
+
+
+
 
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
@@ -22,13 +25,39 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const [sort, setSort] = useState("");
     const [order,setOrder] = useState(-1)
     const [hasSearched, setHasSearched] = useState(false);
+    const [index, setIndex] = useState(0);
 
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
 
-    const handleSubmit = (search:boolean) => {
+    const checkState = (index: number,button:number) => {
+        if(button===3){
+            setIndex(index)
+        }
+        if(index===1 ||index===2||index==3){
+            setIndex(0);
+        }
+        else if(button===1){
+            setIndex(1);
+        }
+        else if(button===2)
+            setIndex(2);
+        else
+            setIndex(3);
+    }
+
+
+
+    const handleSubmit = (search:boolean,Sort:string,index: number,button:number) => {
+
+        checkState(index,button);
+
+        if(Sort == "name")
+            setSort("name")
+        else
+            setSort("goalsScored")
 
         if(search) {
             if(!hasSearched)
@@ -37,49 +66,52 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
         else if(hasSearched)
             dispatch(GetPlayers(playerName, team, sort, order));
     }
-    const changeOrder = () =>{
+
+    const changeOrder = (index:number,button:number) =>{
+        checkState(index,button);
         if(order==-1)
             setOrder(1)
         else
             setOrder(-1)
     }
-    //Grunnen til at jeg opprettet en ny knapp som heter Sort Data er fordi når man kaller på to funksjoner med en
-    //onClik, vil de ikke kalles i rekkefølge. Det gjorde at man må trykke to ganger for å feks sortere.
+
+
 
     return (
         <>
-            <SearchContainer>
+
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
-            <Button onClick={() =>{handleSubmit(true)}}>Search</Button>
+            <Button onClick={() =>{handleSubmit(true,sort,index,3)}}>Search</Button>
             <DropDownComponent changeTeam={setTeam} />
-            <ButtonContainer>
-                <Button onClick={()=>{setSort("name")}}>Sort by name</Button>
-                <Button onClick={()=>{setSort("goalsScored")}}>Sort by goals scored</Button>
-                <Button onClick={changeOrder}>Sort descending</Button>
-            </ButtonContainer>
-            <Button onClick={()=>handleSubmit(false)}>Sort Data</Button>
+            <SortButton index={index} onClick={()=>{
+                handleSubmit(false,"name",index,1)}}>Sort by name</SortButton>
+            <Button index={index} onClick={()=>{
+                handleSubmit(false,"goalsScored",index,2)}}>Sort by goals scored</Button>
+            <Button index={index} onClick={()=>changeOrder(index,4)}>Sort descending</Button>
+            <SearchContainer>
+                        {playerState.player && (
+                                    <ul style={{listStyleType: "none"}}>
+
+                                        {playerState?.player?.map((player) => {
+                                            return (
+
+                                                <PopUp key={player._id}
+                                                       name={player?.name}
+                                                       goals_conceded={player?.goals_scored}
+                                                       goals_scored={player?.goals_scored}
+                                                       assists={player?.assists}
+                                                       clean_sheets={player?.clean_sheets}
+                                                       news={player?.news} own_goals={player.own_goals}
+                                                       team={player?.team}
+                                                       red_cards={player?.red_cards}
+                                                       yellow_cards={player?.yellow_cards}
+                                                />
+                                            )
+                                        })}
+                                    </ul>)
+                                }
 
 
-            {playerState.player && (
-                <ul style={{listStyleType: "none"}}>
-                    {playerState?.player?.map((player)=> {
-                        return (
-                            <PopUp  key={player._id}
-                                    name={player?.name}
-                                    goals_conceded={player?.goals_scored}
-                                    goals_scored={player?.goals_scored}
-                                    assists={player?.assists}
-                                    clean_sheets={player?.clean_sheets}
-                                    news={player?.news} own_goals={player.own_goals}
-                                    team={player?.team}
-                                    red_cards = {player?.red_cards}
-                                    yellow_cards={player?.yellow_cards}
-
-                            />
-                        )
-                    })}
-                </ul>
-            )}
             </SearchContainer>
 
 
@@ -106,15 +138,18 @@ const Input = styled.input<{}>`
   max-height: 40px;
 `;
 
-const Button = styled.button<{}>`
+const Button = styled.button<{index?: number}>`
   border-radius: 0;
   padding: 10px;
   margin-left: 6px;
   max-height: 50px;
   border: #3D195B solid;
-  background-color:white;
   transition: 0.3s;
+
   
+  background-color:white;
+  color:black;
+ 
   :hover{
     background-color:rgba(24,10,36,0.85) ;
     color:white;
@@ -122,6 +157,12 @@ const Button = styled.button<{}>`
   :active{
     background-color: black;
   }
+`;
+
+const SortButton = styled(Button)`
+  background-color: ${(props) => (props.index) === 1? "black":"red"};
+
+
 `;
 const ButtonContainer = styled.div<{}>`
   display: flex;
