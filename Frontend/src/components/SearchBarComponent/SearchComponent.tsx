@@ -18,7 +18,6 @@ interface searchBarProps{
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
     const [team, setTeam] = useState("")
     const [sortVariable ,setSort] = useState("")
-
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
@@ -29,14 +28,14 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     
     return (
         <>
-            <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
-            <Button id="searchButton" onClick={handleSubmit}>Search</Button>
             <DropDownComponent changeTeam={setTeam} />
+            <Input className="searchInput" data-test-target="searchInput" id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}></Input>
+            <Button id="searchButton" onClick={handleSubmit}>Search</Button>
             <SortButton sortBy={"name"} changeSort={setSort} />
             <SortButton sortBy={"goals"} changeSort={setSort}/>
             <SearchContainer>
             {playerState.player && (
-                <ul style={{listStyleType: "none"}}>
+                <ul className="playersList" style={{listStyleType: "none"}}>
                     {playerState?.player?.map((player)=> {
                         return (
                             <PopUp  key={player._id}
@@ -56,8 +55,6 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                 </ul>
             )}
             </SearchContainer>
-
-
         </>
     );
 };

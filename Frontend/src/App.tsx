@@ -10,7 +10,7 @@ import {DropDownComponent} from "./components/DropDownComponent/DropDownComponen
 import Select from "react-select";
 const { Provider } = require('react-redux');
 
-function App() {
+export function App() {
 
     return (
     <>

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import PlLogo from '../../premier-league-1.svg';
+//import PlLogo from '../../premier-league-1.svg';
 export const HeaderComponent: React.FC = () => {
     return(
         <>
             <HeaderContainer>
-                <LogoContainer src={PlLogo} ></LogoContainer>
+                <LogoContainer ></LogoContainer>
                 <HeaderTextContainer>Velkommen til Premier League search!</HeaderTextContainer>
             </HeaderContainer>
         </>
