@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
       sort = {
         name: req.query.sortingOrder,
       };
-    } else if (req.query.sortingOrder == "goalsScored") {
+    } else if (req.query.sortingVariable == "goalsScored") {
       sort = {
         goals_scored: req.query.sortingOrder,
       };

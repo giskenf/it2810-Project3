@@ -14,12 +14,12 @@ function App() {
 
     return (
     <>
-      <div className="App">
-          <HeaderComponent />
-          <FrontPageComponent>
-          </FrontPageComponent>
-          <FooterComponent />
-      </div>
+          <div className="App">
+              <HeaderComponent />
+              <FrontPageComponent>
+              </FrontPageComponent>
+              <FooterComponent />
+          </div>
     </>
   );
 }

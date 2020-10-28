@@ -6,30 +6,29 @@ export const GetPlayers = (
 
     name: string,
     team: string,
-    sort: string
+    sort: string,
+    //hasSearched?: boolean,
+    order: number
 
     ) => async (dispatch:Dispatch<PlayerDispatchTypes>) => {
+    console.log("1")
+        try{
+            dispatch({
+                type: PLAYERS_LOADING
+            })
+            console.log("2")
+            const res = await axios.get
+            (`http://localhost:8000/players/?name=${name}&team=${team}&sortingVariable=${sort}&sortingOrder=${order}`);
 
-    //const first_nameString = `&first_name=${first_name}`
-    //const last_nameString =  `&last_name=${last_name}`
+            dispatch({
+                type: GET_PLAYERS,
+                payload: res.data
+            })
 
-
-    try{
-        dispatch({
-            type: PLAYERS_LOADING
-        })
-
-        const res = await axios.get(`http://localhost:8000/players/?name=${name}&team=${team}`);
-
-        dispatch({
-            type: GET_PLAYERS,
-            payload: res.data
-        })
-
-    } catch(e){
-        dispatch({
-            type: PLAYERS_ERROR
-        })
-    }
+        } catch(e){
+            dispatch({
+                type: PLAYERS_ERROR
+            })
+        }
 };
 
