@@ -6,13 +6,17 @@ const Players = require("../models/Players.ts");
 router.get("/", async (req, res) => {
   try {
     const name = req.query.name; //Hvordan skal vi søke etter de forskjellige kombinasjonene av navn
-    const teamIn = req.query.team; //req.query.team;
+    const teamIn = req.query.team;
+    const limit = 25;
+    const skip = (req.query.page - 1) * limit; //Ganger sidetall med limit for å hente neste "batch"" spillere
     let sort = {};
 
     const filter = {
       name: { $regex: name, $options: "i" },
       team: { $regex: teamIn, $options: "i" },
     };
+
+    // Sjekker sortingvariable for hva det skal sorteres på
 
     if (req.query.sortingVariable == "name") {
       sort = {
@@ -23,10 +27,13 @@ router.get("/", async (req, res) => {
         goals_scored: req.query.sortingOrder,
       };
     } else {
-      const sort = { null: null };
+      const sort = { null: null }; //Ingen spesifikke søk gir hele datasettet
     }
 
-    const players = await Players.find(filter).sort(sort);
+    const players = await Players.find(filter)
+      .sort(sort)
+      .limit(limit)
+      .skip(skip);
     res.json(players);
   } catch (err) {
     res.json({ message: err });
