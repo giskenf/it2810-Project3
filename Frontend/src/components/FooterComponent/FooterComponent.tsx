@@ -31,7 +31,6 @@ export const FooterComponent: React.FC = () => {
             <FooterContainer>
             <div className={classes.root}>{pageProvider.selectedPage}
                 <Pagination
-
                     count={numberOfPageProvider.numberOfPages}
                     color={"primary"}
                     page={pageProvider.selectedPage}

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
@@ -61,7 +61,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const handleSubmit = (search:boolean,Sort:string,button:number) => {
 
         //Trykker på sorter etter navn knappen for  2 gang
-        if(!(button===4)) {
+        if(!(button===1)) {
             checkState(button,Sort);
         }
         //sjekker om en allerede har søkt
@@ -69,7 +69,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             if(!hasSearched)
                 setHasSearched(true)
             pageProvider.setSelectedPage(1);
-            dispatch(GetPlayers(playerName, team, Sort, order,pageProvider.selectedPage));}
+            dispatch(GetPlayers(playerName, team, Sort, order,1));}
         else if(hasSearched)
             dispatch(GetPlayers(playerName, team, Sort, order,pageProvider.selectedPage));
     }
@@ -81,6 +81,8 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             setOrder(-1)
     }
 
+    useEffect(()=>handleSubmit(false,sort,1),[pageProvider.selectedPage])
+    console.log(pageProvider.selectedPage)
     return (
         <>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
@@ -162,12 +164,10 @@ const SortButton = styled(Button)`
   color: ${(props) => (props.index) === 1? "white":"black"};
 
 `;
-<<<<<<< HEAD
-=======
 const ButtonContainer = styled.div<{}>`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
 `;
->>>>>>> f405548f52f1bb3229bf1d8f2f9e9e3ec28356c8
+
