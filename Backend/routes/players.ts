@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
     const limit = 15;
     const skip = (req.query.page - 1) * limit; //Ganger sidetall med limit for å hente neste "batch"" spillere
     let sort = {};
-
     const filter = {
       name: { $regex: name, $options: "i" },
       team: { $regex: teamIn, $options: "i" },
