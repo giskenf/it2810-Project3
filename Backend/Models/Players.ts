@@ -1,5 +1,3 @@
-import { OPENSSL_VERSION_NUMBER } from "constants";
-
 const mongoose = require("mongoose");
 
 const PlayerSchema = mongoose.Schema({

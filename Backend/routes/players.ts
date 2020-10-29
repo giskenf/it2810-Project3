@@ -28,12 +28,17 @@ router.get("/", async (req, res) => {
     } else {
       const sort = { null: null }; //Ingen spesifikke søk gir hele datasettet
     }
+    const count = await Players.countDocuments(filter);
 
     const players = await Players.find(filter)
       .sort(sort)
-      .limit(limit)
+      .limit(15)
       .skip(skip);
-    res.json(players);
+    const res1 = {
+      players: players,
+      count: count,
+    };
+    res.json(res1);
   } catch (err) {
     res.json({ message: err });
   }

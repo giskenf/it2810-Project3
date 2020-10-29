@@ -24,7 +24,7 @@ export type playerAbility = {
 export interface GetPlayers {
   type: typeof GET_PLAYERS;
   payload: playerAbility[];
-  //payload: playerAbility
+  count: number;
 }
 
 export interface PlayersLoading {

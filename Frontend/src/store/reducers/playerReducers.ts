@@ -5,6 +5,7 @@ interface DefaultStateI {
     loading: boolean,
     //player?: PlayerType
     player?: playerAbility[]
+    count?: number
 }
 
 const defaultState: DefaultStateI = {
@@ -25,7 +26,8 @@ const playerReducer = (state: DefaultStateI=defaultState, action: PlayerDispatch
         case GET_PLAYERS:
             return{
                 loading: false,
-                player: action.payload
+                player: action.payload,
+                count: action.count
             }
         default:
             return state
