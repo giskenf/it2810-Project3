@@ -9,4 +9,5 @@ const PlayerSchema = mongoose.Schema({
   vote: Number,
 });
 
+
 module.exports = mongoose.model("players", PlayerSchema);

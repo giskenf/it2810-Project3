@@ -1,8 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { SearchBarComponent } from "../SearchBarComponent/SearchComponent";
-import { DropDownComponent } from "../DropDownComponent/DropDownComponent";
-//import {PlayerList} from "../PlayerList";
+import React from 'react';
+import styled from 'styled-components';
+import {SearchBarComponent} from "../SearchBarComponent/SearchComponent";
+import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import Select from "react-select";
 
 const options = [
