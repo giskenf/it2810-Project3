@@ -39,10 +39,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/:_id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    console.log(req.query.votes);
-    console.log(req.query.id);
+    console.log(req.query);
+    console.log(req.params);
     const updatedPlayer = await Players.findOneAndUpdate(
       { _id: req.params.id },
       { votes: req.query.votes }

@@ -83,6 +83,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
               return (
                 <PopUp
                   key={player._id}
+                  id={player._id}
                   name={player?.name}
                   goals_conceded={player?.goals_scored}
                   goals_scored={player?.goals_scored}
@@ -93,7 +94,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
                   team={player?.team}
                   red_cards={player?.red_cards}
                   yellow_cards={player?.yellow_cards}
-                  votes={player?.votes}
+                  votes={player.votes}
                 />
               );
             })}
