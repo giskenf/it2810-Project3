@@ -6,6 +6,7 @@ const PlayerSchema = mongoose.Schema({
   lastName: String,
   goalsScored: Number,
   assists: Number,
+  vote: Number,
 });
 
 
