@@ -39,6 +39,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:_id", async (req, res) => {
+  try {
+    console.log(req.query.votes);
+    console.log(req.query.id);
+    const updatedPlayer = await Players.findOneAndUpdate(
+      { _id: req.params.id },
+      { votes: req.query.votes }
+    );
+    res.json(updatedPlayer);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 //get one
 /*
 router.get("/:_id", async (req, res) => {
@@ -57,26 +71,3 @@ router.get("/:_id", async (req, res) => {
 */
 
 module.exports = router;
-
-//get all
-
-//get team
-
-//get nationality
-
-//insert player
-router.put("/:id", async (req, res) => {
-  const player = new Players({
-    //hva enn vi vil ha med
-  });
-
-  try {
-    const updatedPlayer = await player.updateOne(
-      { id: req.params.id },
-      { vote: req.params.vote }
-    );
-    res.status(201).json(player);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});

@@ -93,6 +93,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
                   team={player?.team}
                   red_cards={player?.red_cards}
                   yellow_cards={player?.yellow_cards}
+                  votes={player?.votes}
                 />
               );
             })}
