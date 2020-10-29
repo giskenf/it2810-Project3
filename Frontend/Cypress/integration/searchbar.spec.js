@@ -10,12 +10,6 @@ describe('Searchbar', () => {
         cy.contains('Sort by goals').click();
     });
 
-    it('Test drop down menu', () => {
-        const typeInput = 'Rashford';
-        cy.get('.select').should('be.visible');
-            /*.type(typeInput)
-            .should('have.value', typeInput);*/
-    });
 
     it('Test search input', () => {
         const typeInput = 'Rashford';
@@ -29,4 +23,11 @@ describe('Searchbar', () => {
         cy.get('.playersList').should('be.visible');
     });
 
+    it('Correct player appears after search', () => {
+        cy.server();
+        cy.route('/players/?skip=0&name=rashford').as('search');
+        cy.get('.searchInput').type('rashf').should('have.value', 'rashf');
+        cy.contains('Search').click();
+        cy.get('.playersList').first().contains('Rashford');
+    });
 });
