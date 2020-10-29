@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Players = require("../models/Players.ts");
 
-
 //get all
 router.get("/", async (req, res) => {
   try {
@@ -28,26 +27,26 @@ router.get("/", async (req, res) => {
     } else {
       const sort = { null: null }; //Ingen spesifikke søk gir hele datasettet
     }
-    const count = await Players.countDocuments(filter)
+    const count = await Players.countDocuments(filter);
 
     const players = await Players.find(filter)
-        .sort(sort)
-        .limit(15) //as Player[];
-        .skip(skip)
+      .sort(sort)
+      .limit(15)
+      .skip(skip);
     const res1 = {
       players: players,
       count: count,
-    }
+    };
     res.json(res1);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-router.put("/:_id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    console.log(req.query.votes);
-    console.log(req.query.id);
+    console.log(req.query);
+    console.log(req.params);
     const updatedPlayer = await Players.findOneAndUpdate(
       { _id: req.params.id },
       { votes: req.query.votes }

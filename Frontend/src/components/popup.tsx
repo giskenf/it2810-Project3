@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   createStyles,
   Theme,
@@ -78,13 +78,24 @@ export function PopUp(props: any) {
   const handleClose = () => {
     setOpen(false);
   };
+  const [number, setNumber] = useState(0);
+  const [votes, setVotes] = useState<number>(props.votes);
+  useEffect(() => {
+    const changeVote = async () => {
+      console.log(props.id);
+      const votesAndNumber = votes + number;
+      setVotes(votesAndNumber);
 
-  const changeVote = (number: number) => {
-    const votes = props.votes + number;
-    const data = axios.put("http://localhost:8000/players/" + props.id, {
-      votes: votes,
-    });
-  };
+      console.log(votesAndNumber);
+      console.log(number);
+      console.log(votes);
+      console.log(typeof votes);
+      const data = await axios.put(
+        "http://localhost:8000/players/" + props.id + "?votes=" + votesAndNumber
+      );
+    };
+    changeVote();
+  }, [number]);
 
   return (
     <Div>
@@ -116,7 +127,7 @@ export function PopUp(props: any) {
             <p>Clean sheets: {props.clean_sheets}</p>
             <p>Red cards: {props.red_cards}</p>
             <p>Yellow cards: {props.yellow_cards}</p>
-            <p>Votes: {props.votes}</p>
+            <p>Votes: {votes}</p>
           </Typography>
           <Typography gutterBottom>
             <h5>News</h5>
@@ -124,10 +135,10 @@ export function PopUp(props: any) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => changeVote(1)} color="primary">
+          <Button autoFocus onClick={() => setNumber(1)} color="primary">
             Upvote
           </Button>
-          <Button autoFocus onClick={() => changeVote(-1)} color="primary">
+          <Button autoFocus onClick={() => setNumber(-1)} color="primary">
             Upvote
           </Button>
         </DialogActions>

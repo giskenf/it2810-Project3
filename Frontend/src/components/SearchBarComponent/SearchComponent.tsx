@@ -6,13 +6,13 @@ import {GetPlayers} from "../../store/actions/playersAction";
 import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
 import rootReducer from "../../store/reducers";
-import {GlobalContext} from "../GlobalProvider";
+import { GlobalContext } from "../GlobalProvider";
 
-interface searchBarProps{
-    playerState?: ReturnType<typeof rootReducer>
-    index1?: number;
-    index2?: number;
-    setIndex?(id: number): void;
+interface searchBarProps {
+  playerState?: ReturnType<typeof rootReducer>;
+  index1?: number;
+  index2?: number;
+  setIndex?(id: number): void;
 }
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
@@ -140,19 +140,19 @@ const Input = styled.input<{}>`
   max-height: 40px;
 `;
 
-const Button = styled.button<{index?: number}>`
+const Button = styled.button<{ index?: number }>`
   border-radius: 0;
   padding: 10px;
   margin-left: 6px;
   max-height: 50px;
-  border: #3D195B solid;
+  border: #3d195b solid;
   transition: 0.3s;
-  background-color:white;
-  color:black;
- 
-  :hover{
-    background-color:rgba(24,10,36,0.85) ;
-    color:white;
+  background-color: white;
+  color: black;
+
+  :hover {
+    background-color: rgba(24, 10, 36, 0.85);
+    color: white;
   }
   :active {
     background-color: black;
@@ -160,9 +160,8 @@ const Button = styled.button<{index?: number}>`
 `;
 
 const SortButton = styled(Button)`
-  background-color: ${(props) => (props.index) === 1? "black":"white"};
-  color: ${(props) => (props.index) === 1? "white":"black"};
-
+  background-color: ${(props) => (props.index === 1 ? "black" : "white")};
+  color: ${(props) => (props.index === 1 ? "white" : "black")};
 `;
 const ButtonContainer = styled.div<{}>`
   display: flex;

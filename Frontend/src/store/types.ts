@@ -8,23 +8,23 @@ export type PlayerType = {
 };
 
 export type playerAbility = {
+  _id: string;
+  name: string;
+  news: string;
+  goals_scored: number;
+  assists: number;
+  clean_sheets: number;
+  own_goals: number;
+  yellow_cards: number;
+  red_cards: number;
+  team: string;
+  votes: number;
+};
 
-    _id: string
-    name: string
-    news: string
-    goals_scored: number
-    assists: number
-    clean_sheets: number
-    own_goals: number
-    yellow_cards: number
-    red_cards: number
-    team: string
-}
-
-export interface GetPlayers{
-    type: typeof GET_PLAYERS
-    payload: playerAbility[]
-    count: number
+export interface GetPlayers {
+  type: typeof GET_PLAYERS;
+  payload: playerAbility[];
+  count: number;
 }
 
 export interface PlayersLoading {
