@@ -5,29 +5,33 @@ describe('Searchbar', () => {
     });
 
     it('Find buttons', () => {
-        cy.contains('Search').click();
-        cy.contains('Sort by name').click();
-        cy.contains('Sort by goals').click();
+        cy.contains('Search')
+            .click();
+        cy.contains('Sort by name')
+            .click();
+        cy.contains('Sort by goals')
+            .click();
     });
 
-
-    it('Test search input', () => {
-        const typeInput = 'Rashford';
-        cy.get('.searchInput')
-        .type(typeInput)
-        .should('have.value', typeInput);
+    it('Shows all players after clicking search button', () => {
+        cy.contains('Search')
+            .click()
+            .get('.playersList')
+            .contains('Rashford')
+            .should('not.have.value', 'Ronaldo');
     });
 
-    it('Shows players after clicking search button', () => {
-        cy.contains('Search').click();
-        cy.get('.playersList').should('be.visible');
-    });
+//Test search functionality
 
     it('Correct player appears after search', () => {
-        cy.server();
-        cy.route('/players/?skip=0&name=rashford').as('search');
-        cy.get('.searchInput').type('rashf').should('have.value', 'rashf');
-        cy.contains('Search').click();
-        cy.get('.playersList').first().contains('Rashford');
+        const typeInput = 'Rashf';
+        cy.get('.searchInput')
+            .type(typeInput)
+            .should('have.value', typeInput)
+        cy.contains('Search')
+            .click()
+            .get('.playersList')
+            .contains('Rashford');
+            //.should('not.have.value', 'Henderson');
     });
 });

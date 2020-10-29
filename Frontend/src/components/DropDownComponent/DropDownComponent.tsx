@@ -42,7 +42,7 @@ export const DropDownComponent: React.FC<DropDownProps> = (props:DropDownProps) 
 
     return (
         <>
-            <Select className="select"
+            <Select className="react-select"
                     //defaultValue = {options[0]}
                     classNamePrefix="react-select"
                     options={options}

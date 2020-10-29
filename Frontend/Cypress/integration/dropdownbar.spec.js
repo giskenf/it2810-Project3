@@ -1,17 +1,18 @@
-describe('Searchbar', () => {
+describe('Drop Down Bar', () => {
     beforeEach(() => {
         cy.visit(Cypress.config('appUrl'));
         cy.waitForReact();
     });
 
     it('Test drop down menu', () => {
-        const typeInput = 'manchester uni';
-        cy.get('.select').should('be.visible');
-        cy.get('.select').type(typeInput).should('have.value', typeInput);
-        cy.contains(typeInput).click();
-        cy.contains('Search').click();
-        cy.get('.playersList').contains('Lingard');
+        const typeInput = 'arsenal';
+        cy.get('.react-select')
+            //.type(typeInput)
+            .should('have.value', 'Manchester United');
+            //.contains('Arsenal');
+        /*cy.contains('Search')
+            .click()
+            .get('.playersList')
+            .contains('Rashford');*/
     });
-
-
 });

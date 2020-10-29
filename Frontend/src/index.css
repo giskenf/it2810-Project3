@@ -8,7 +8,7 @@ body {
   margin: 0;
 }
 
-.select {
+.react-select {
   padding: 4px;
   width: 15%;
   font-size: small;
