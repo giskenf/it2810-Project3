@@ -123,10 +123,10 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
 
 const SearchContainer = styled.div<{}>`
   display: flex;
-  flex-direction:row;
-  flex-wrap: wrap; 
+  flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 `;
 
@@ -134,7 +134,7 @@ const Input = styled.input<{}>`
   width: 300px;
   margin: 0 0 0 30px;
   padding: 10px;
-  border: #3D195B solid;
+  border: #3d195b solid;
   max-height: 40px;
 `;
 
@@ -152,7 +152,7 @@ const Button = styled.button<{index?: number}>`
     background-color:rgba(24,10,36,0.85) ;
     color:white;
   }
-  :active{
+  :active {
     background-color: black;
   }
 `;
@@ -162,3 +162,12 @@ const SortButton = styled(Button)`
   color: ${(props) => (props.index) === 1? "white":"black"};
 
 `;
+<<<<<<< HEAD
+=======
+const ButtonContainer = styled.div<{}>`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+>>>>>>> f405548f52f1bb3229bf1d8f2f9e9e3ec28356c8
