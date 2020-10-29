@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Players = require("../models/Players.ts");
 
+
 //get all
 router.get("/", async (req, res) => {
   try {
@@ -25,13 +26,16 @@ router.get("/", async (req, res) => {
     } else {
       const sort = { null: null };
     }
+    const count = await Players.countDocuments(filter)
 
     const players = await Players.find(filter)
         .sort(sort)
-        .limit(15);
-    console.log(players)
-    console.log(players)
-    res.json(players);
+        .limit(15) //as Player[];
+    const res1 = {
+      players: players,
+      count: count,
+    }
+    res.json(res1);
   } catch (err) {
     res.json({ message: err });
   }

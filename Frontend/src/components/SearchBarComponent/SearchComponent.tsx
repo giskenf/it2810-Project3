@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStore} from "../../store/store";
@@ -6,21 +6,14 @@ import {GetPlayers} from "../../store/actions/playersAction";
 import {DropDownComponent} from "../DropDownComponent/DropDownComponent";
 import {PopUp} from "../popup"
 import rootReducer from "../../store/reducers";
-import PropTypes from 'prop-types';
-import InfiniteScroll from 'react-infinite-scroll-component';
-
-
+import {GlobalContext} from "../GlobalProvider";
 
 interface searchBarProps{
     playerState?: ReturnType<typeof rootReducer>
     index1?: number;
-    index2: number;
+    index2?: number;
     setIndex?(id: number): void;
 }
-
-
-
-
 
 export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarProps) => {
 
@@ -36,51 +29,49 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
 
+    const {pageProvider,numberOfPageProvider} =useContext(GlobalContext);
 
     //metode for å endre farge på knappene når de trykkes
     const checkState = (button:number,Sort:string) => {
+        //søk knappen trykkes
         if(button===1) {
 
         }
+        //en knapp som allerede er aktiv trykkes
         else if(Sort==sort){
             setIndex1(0)
             setIndex2(0)
             setSort("")
         }
+        //sortere på navn
         else if(Sort=="name"){
             setIndex2(0)
             setIndex1(1)
             setSort("name")
-
         }
+        //sortere på antall mål
         else if(Sort=="goalsScored"){
             setIndex1(0)
             setIndex2(1)
             setSort("goalsScored")
         }
-
     }
-
-
-
-
-
+    console.log(playerState);
     const handleSubmit = (search:boolean,Sort:string,button:number) => {
 
         //Trykker på sorter etter navn knappen for  2 gang
         if(!(button===4)) {
             checkState(button,Sort);
         }
-
+        //sjekker om en allerede har søkt
         if(search) {
             if(!hasSearched)
                 setHasSearched(true)
-            dispatch(GetPlayers(playerName, team, sort, order));}
+            pageProvider.setSelectedPage(1);
+            dispatch(GetPlayers(playerName, team, sort, order,pageProvider.selectedPage));}
         else if(hasSearched)
-            dispatch(GetPlayers(playerName, team, sort, order));
+            dispatch(GetPlayers(playerName, team, sort, order,pageProvider.selectedPage));
     }
-
-
     const changeOrder = () =>{
         //checkState(button);
         if(order==-1)
@@ -89,11 +80,8 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             setOrder(-1)
     }
 
-
-
     return (
         <>
-
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button onClick={() =>{handleSubmit(true,sort,1)}}>Search</Button>
             <DropDownComponent changeTeam={setTeam} />
@@ -107,6 +95,9 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                                     <ul style={{listStyleType: "none"}}>
 
                                         {playerState?.player?.map((player) => {
+                                            if (playerState.count != null) {
+                                                numberOfPageProvider.setNumberOfPages(Math.ceil(playerState.count / 15))
+                                            }
                                             return (
 
                                                 <PopUp key={player._id}
@@ -124,16 +115,10 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                                         })}
                                     </ul>)
                                 }
-
-
             </SearchContainer>
-
-
         </>
     );
 };
-
-//fjernet at Input tok inn boolean
 
 const SearchContainer = styled.div<{}>`
   display: flex;
@@ -159,8 +144,6 @@ const Button = styled.button<{index?: number}>`
   max-height: 50px;
   border: #3D195B solid;
   transition: 0.3s;
-
-  
   background-color:white;
   color:black;
  
