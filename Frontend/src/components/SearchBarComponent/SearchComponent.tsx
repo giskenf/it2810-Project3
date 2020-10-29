@@ -9,9 +9,12 @@ import rootReducer from "../../store/reducers";
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+
+
 interface searchBarProps{
     playerState?: ReturnType<typeof rootReducer>
-    index?: number;
+    index1?: number;
+    index2: number;
     setIndex?(id: number): void;
 }
 
@@ -25,39 +28,49 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const [sort, setSort] = useState("");
     const [order,setOrder] = useState(-1)
     const [hasSearched, setHasSearched] = useState(false);
-    const [index, setIndex] = useState(0);
+    const [index1, setIndex1] = useState(0);
+    const [index2,setIndex2] = useState(0)
 
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
     const playerState = useSelector((state: RootStore) => state.players);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setPlayerName(event.target.value);
 
-    const checkState = (index: number,button:number) => {
-        if(button===3){
-            setIndex(index)
+
+    //metode for å endre farge på knappene når de trykkes
+    const checkState = (button:number,Sort:string) => {
+        if(button===1) {
+
         }
-        if(index===1 ||index===2||index==3){
-            setIndex(0);
+        else if(Sort==sort){
+            setIndex1(0)
+            setIndex2(0)
+            setSort("")
         }
-        else if(button===1){
-            setIndex(1);
+        else if(Sort=="name"){
+            setIndex2(0)
+            setIndex1(1)
+            setSort("name")
+
         }
-        else if(button===2)
-            setIndex(2);
-        else
-            setIndex(3);
+        else if(Sort=="goalsScored"){
+            setIndex1(0)
+            setIndex2(1)
+            setSort("goalsScored")
+        }
+
     }
 
 
 
-    const handleSubmit = (search:boolean,Sort:string,index: number,button:number) => {
 
-        checkState(index,button);
 
-        if(Sort == "name")
-            setSort("name")
-        else
-            setSort("goalsScored")
+    const handleSubmit = (search:boolean,Sort:string,button:number) => {
+
+        //Trykker på sorter etter navn knappen for  2 gang
+        if(!(button===4)) {
+            checkState(button,Sort);
+        }
 
         if(search) {
             if(!hasSearched)
@@ -67,8 +80,9 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             dispatch(GetPlayers(playerName, team, sort, order));
     }
 
-    const changeOrder = (index:number,button:number) =>{
-        checkState(index,button);
+
+    const changeOrder = () =>{
+        //checkState(button);
         if(order==-1)
             setOrder(1)
         else
@@ -81,13 +95,13 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
         <>
 
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
-            <Button onClick={() =>{handleSubmit(true,sort,index,3)}}>Search</Button>
+            <Button onClick={() =>{handleSubmit(true,sort,1)}}>Search</Button>
             <DropDownComponent changeTeam={setTeam} />
-            <SortButton index={index} onClick={()=>{
-                handleSubmit(false,"name",index,1)}}>Sort by name</SortButton>
-            <Button index={index} onClick={()=>{
-                handleSubmit(false,"goalsScored",index,2)}}>Sort by goals scored</Button>
-            <Button index={index} onClick={()=>changeOrder(index,4)}>Sort descending</Button>
+            <SortButton index={index1} onClick={()=>{
+                handleSubmit(false,"name",2)}}>Sort by name</SortButton>
+            <SortButton index={index2} onClick={()=>{
+                handleSubmit(false,"goalsScored",3)}}>Sort by goals scored</SortButton>
+            <SortButton index={order} onClick={()=>changeOrder()}>Sort descending</SortButton>
             <SearchContainer>
                         {playerState.player && (
                                     <ul style={{listStyleType: "none"}}>
@@ -160,8 +174,8 @@ const Button = styled.button<{index?: number}>`
 `;
 
 const SortButton = styled(Button)`
-  background-color: ${(props) => (props.index) === 1? "black":"red"};
-
+  background-color: ${(props) => (props.index) === 1? "black":"white"};
+  color: ${(props) => (props.index) === 1? "white":"black"};
 
 `;
 const ButtonContainer = styled.div<{}>`
