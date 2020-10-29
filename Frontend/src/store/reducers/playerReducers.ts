@@ -12,7 +12,6 @@ const defaultState: DefaultStateI = {
     loading: false
 }
 
-
 const playerReducer = (state: DefaultStateI=defaultState, action: PlayerDispatchTypes): DefaultStateI => {
     switch(action.type){
         case PLAYERS_ERROR:

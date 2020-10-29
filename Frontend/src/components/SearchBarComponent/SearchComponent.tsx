@@ -19,10 +19,10 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
 
     const [team, setTeam] = useState("");
     const [sort, setSort] = useState("");
-    const [order,setOrder] = useState(-1)
+    const [order,setOrder] = useState(-1);
     const [hasSearched, setHasSearched] = useState(false);
     const [index1, setIndex1] = useState(0);
-    const [index2,setIndex2] = useState(0)
+    const [index2,setIndex2] = useState(0);
 
     const dispatch = useDispatch();
     const [playerName, setPlayerName] = useState("");
@@ -35,7 +35,6 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     const checkState = (button:number,Sort:string) => {
         //søk knappen trykkes
         if(button===1) {
-
         }
         //en knapp som allerede er aktiv trykkes
         else if(Sort==sort){
@@ -48,15 +47,17 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             setIndex2(0)
             setIndex1(1)
             setSort("name")
+
         }
+
         //sortere på antall mål
         else if(Sort=="goalsScored"){
             setIndex1(0)
             setIndex2(1)
             setSort("goalsScored")
+            console.log("GOALS")
         }
     }
-    console.log(playerState);
     const handleSubmit = (search:boolean,Sort:string,button:number) => {
 
         //Trykker på sorter etter navn knappen for  2 gang
@@ -68,9 +69,9 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             if(!hasSearched)
                 setHasSearched(true)
             pageProvider.setSelectedPage(1);
-            dispatch(GetPlayers(playerName, team, sort, order,pageProvider.selectedPage));}
+            dispatch(GetPlayers(playerName, team, Sort, order,pageProvider.selectedPage));}
         else if(hasSearched)
-            dispatch(GetPlayers(playerName, team, sort, order,pageProvider.selectedPage));
+            dispatch(GetPlayers(playerName, team, Sort, order,pageProvider.selectedPage));
     }
     const changeOrder = () =>{
         //checkState(button);
@@ -89,7 +90,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                 handleSubmit(false,"name",2)}}>Sort by name</SortButton>
             <SortButton index={index2} onClick={()=>{
                 handleSubmit(false,"goalsScored",3)}}>Sort by goals scored</SortButton>
-            <SortButton index={order} onClick={()=>changeOrder()}>Sort descending</SortButton>
+            <SortButton index={order} onClick={()=>changeOrder()}>Sort ascending</SortButton>
             <SearchContainer>
                         {playerState.player && (
                                     <ul style={{listStyleType: "none"}}>
@@ -160,10 +161,4 @@ const SortButton = styled(Button)`
   background-color: ${(props) => (props.index) === 1? "black":"white"};
   color: ${(props) => (props.index) === 1? "white":"black"};
 
-`;
-const ButtonContainer = styled.div<{}>`
-  display: flex;
-  flex-direction:column;
-  flex-wrap: wrap; 
-  justify-content: center; 
 `;
