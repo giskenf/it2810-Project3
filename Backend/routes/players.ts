@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   try {
     const name = req.query.name; //Hvordan skal vi søke etter de forskjellige kombinasjonene av navn
     const teamIn = req.query.team;
-    const limit = 25;
+    const limit = 15;
     const skip = (req.query.page - 1) * limit; //Ganger sidetall med limit for å hente neste "batch"" spillere
     let sort = {};
 
@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
     };
 
     // Sjekker sortingvariable for hva det skal sorteres på
-
     if (req.query.sortingVariable == "name") {
       sort = {
         name: req.query.sortingOrder,
@@ -66,17 +65,18 @@ module.exports = router;
 //get nationality
 
 //insert player
-/* router.put('/', async (req, res) => {
+router.put("/:id", async (req, res) => {
+  const player = new Players({
+    //hva enn vi vil ha med
+  });
 
-    const player = new Players({
-        //hva enn vi vil ha med
-    })
-
-    try{
-        const newPlayer = await player.save();
-        res.status(201).json(player);
-    } catch(err){
-        res.status(400).json(err);
-    }
-
-}); */
+  try {
+    const updatedPlayer = await player.updateOne(
+      { id: req.params.id },
+      { vote: req.params.vote }
+    );
+    res.status(201).json(player);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
