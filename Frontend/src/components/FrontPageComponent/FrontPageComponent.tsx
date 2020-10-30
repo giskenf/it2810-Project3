@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import {SearchBarComponent} from "../SearchBarComponent/SearchComponent";
 
 export const FrontPageComponent: React.FC = () => {
-    return(
-        <>
-            <FrontPageContainer>
-                <SearchBarComponent />
-            </FrontPageContainer>
-        </>
-    )
+  return (
+    <>
+      <FrontPageContainer>
+        <SearchBarComponent />
+      </FrontPageContainer>
+    </>
+  );
 };
 
-const FrontPageContainer = styled.div<{ }>`
+const FrontPageContainer = styled.div<{}>`
   display: flex;
   flex-direction: row;
   background-color: white;
-  justify-content: center; 
+  justify-content: center;
   flex-wrap: wrap;
   padding: 30px;
 `;

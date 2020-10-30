@@ -37,7 +37,6 @@ export const DropDownComponent: React.FC<DropDownProps> = (props:DropDownProps) 
     //const [team, setTeam] = useState(options[0])
     const handleChange = (selectedOption: any) => {
         props.changeTeam(selectedOption.value);
-        console.log(selectedOption);
     };
 
     return (
