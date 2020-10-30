@@ -114,7 +114,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
       <SearchContainer>
           {/*Dersom det er enn playerState(spillere er hentet), blir alle spillere listet opp:*/}
         {playerState.player && (
-          <ul style={{ listStyleType: "none" }}>
+          <ul className="playersList" style={{ listStyleType: "none" }}>
             {playerState?.player?.map((player) => {
               if (playerState.count != null) {
                 numberOfPageProvider.setNumberOfPages(
@@ -215,4 +215,3 @@ const ButtonContainer = styled.div<{}>`
     flex-direction: column;
   }
 `;
-

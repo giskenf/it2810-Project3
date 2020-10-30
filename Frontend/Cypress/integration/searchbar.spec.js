@@ -16,8 +16,9 @@ describe('Searchbar', () => {
     it('Shows all players after clicking search button', () => {
         cy.contains('Search')
             .click()
+            .get('.pagination').get('>').click({ multiple: true })
             .get('.playersList')
-            .contains('Rashford')
+            //.contains('Marcus Rashford')
             .should('not.have.value', 'Ronaldo');
     });
 
@@ -31,7 +32,7 @@ describe('Searchbar', () => {
         cy.contains('Search')
             .click()
             .get('.playersList')
-            .contains('Rashford');
-            //.should('not.have.value', 'Henderson');
+            .contains('Rashford')
+            .should('not.have.value', 'Henderson');
     });
 });

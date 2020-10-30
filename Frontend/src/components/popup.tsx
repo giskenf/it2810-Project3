@@ -94,8 +94,8 @@ export function PopUp(props: any) {
   }, [number]);
 
   return (
-    <Div>
-      <Button
+    <Div >
+      <Button className="popupButton"
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}

@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import store from '../src/store/store';
 import {FrontPageComponent} from "./components/FrontPageComponent/FrontPageComponent";
 import {SearchBarComponent} from "./components/SearchBarComponent/SearchComponent";
-import {PopUp} from "./components/popup";
+import {DropDownComponent} from "./components/DropDownComponent/DropDownComponent";
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure } from 'enzyme';
@@ -25,15 +25,11 @@ test('Renders header', () =>{
   expect(container).toBeTruthy();
 });
 
-test('Renders search', () => {
-  const { container } = render(<Provider store={store}>(<FrontPageComponent /></Provider>);
-  expect(screen.getByText('Search')).toBeTruthy();
-  expect(container).toBeTruthy();
-});
-
 test('Test list of players', () => {
   const search = shallow(<Provider store={store}>(<SearchBarComponent /></Provider>);
-  //expect(search.find(PopUp)).toBe(true);
-  expect(search.contains('.playersList')).toBe(true);
+  expect(search.find('.playersList'));
 });
+
+
+
 
