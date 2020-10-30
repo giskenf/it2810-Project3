@@ -7,12 +7,12 @@ describe('Drop Down Bar', () => {
     it('Test drop down menu', () => {
         const typeInput = 'arsenal';
         cy.get('.react-select')
-            //.type(typeInput)
-            .should('have.value', 'Manchester United');
-            //.contains('Arsenal');
+            .type(typeInput)
+            .contains('Arsenal');
         /*cy.contains('Search')
             .click()
-            .get('.playersList')
-            .contains('Rashford');*/
+        cy.get('.playersList')
+            .contains('Henderson');
+        cy.log(cy.get('.playersList'));*/
     });
 });
