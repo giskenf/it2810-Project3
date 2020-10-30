@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//setter opp et skjema som matcher objektene i databasen
 const PlayerSchema = mongoose.Schema({
   id: Number,
   votes: Number,
