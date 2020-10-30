@@ -1,31 +1,27 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
-import {GlobalContext, GlobalProvider} from "../GlobalProvider";
+import {GlobalContext} from "../GlobalProvider";
 
-
-const useStyles = makeStyles((theme) =>
+//Metode for inn å style komponent fra Material-UI
+const useStyles = makeStyles(() =>
     createStyles({
         root: {
             '& > *': {
-                // marginTop: theme.spacing(0),
                 color: 'white'
             },
         },
-
     }),
 );
 
-
 export const FooterComponent: React.FC = () => {
     const classes = useStyles();
-    const {pageProvider,numberOfPageProvider,isDisabledProvider} =useContext(GlobalContext);
+    const {pageProvider,numberOfPageProvider,isDisabledProvider} = useContext(GlobalContext);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         pageProvider.setSelectedPage(value);
     }
-
 
     return(
         <>
@@ -44,7 +40,6 @@ export const FooterComponent: React.FC = () => {
         </>
     )
 };
-
 
 const FooterContainer = styled.div<{ }>`
   display: flex;

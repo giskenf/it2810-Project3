@@ -8,6 +8,7 @@ body {
   margin: 0;
 }
 
+/*Css to overwrite thrid-party component syle*/
 .react-select {
   padding: 4px;
   width: 15%;
@@ -15,7 +16,6 @@ body {
   font-size: small;
 
 }
-
 .react-select-container {
   border: none;
   border-radius: 0;
@@ -23,7 +23,6 @@ body {
   width: 250px;
   align-items: center;
 }
-
 
 .react-select__indicator-separator {
   display: none;

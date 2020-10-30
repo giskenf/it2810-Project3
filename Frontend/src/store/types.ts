@@ -2,11 +2,6 @@ export const GET_PLAYERS = "GET_PLAYERS";
 export const PLAYERS_LOADING = "PLAYERS_LOADING";
 export const PLAYERS_ERROR = "PLAYERS_ERROR";
 
-export type PlayerType = {
-  playerabilities: playerAbility[];
-  //mulig playerAbility er en liste også
-};
-
 export type playerAbility = {
   _id: string;
   name: string;

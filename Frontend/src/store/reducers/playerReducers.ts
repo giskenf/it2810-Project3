@@ -1,9 +1,7 @@
-import {GET_PLAYERS, PlayerDispatchTypes, PLAYERS_ERROR, PLAYERS_LOADING, PlayerType,playerAbility} from '../types'
-
+import {GET_PLAYERS, PlayerDispatchTypes, PLAYERS_ERROR, PLAYERS_LOADING, playerAbility} from '../types'
 
 interface DefaultStateI {
     loading: boolean,
-    //player?: PlayerType
     player?: playerAbility[]
     count?: number
 }

@@ -1,8 +1,5 @@
-import React, { useState }  from 'react';
-import styled from 'styled-components';
+import React  from 'react';
 import Select from 'react-select';
-//import { ValueType, OptionType } from "react-select";
-
 
 interface DropDownProps{
     changeTeam:(a:string)=> void;
@@ -30,11 +27,9 @@ const options = [
     { value: 'West Brom', label: 'West Bromwich'},
     { value: 'West Ham', label: 'West Ham' },
     { value: 'Wolves', label: 'Wolverhampton' },
-
 ];
-
+//Funksjonen changeTeam sendes ned som en prop fra SearchComponent
 export const DropDownComponent: React.FC<DropDownProps> = (props:DropDownProps) => {
-    //const [team, setTeam] = useState(options[0])
     const handleChange = (selectedOption: any) => {
         props.changeTeam(selectedOption.value);
     };
@@ -42,7 +37,6 @@ export const DropDownComponent: React.FC<DropDownProps> = (props:DropDownProps) 
     return (
         <>
             <Select className="react-select"
-                    //defaultValue = {options[0]}
                     classNamePrefix="react-select"
                     options={options}
                     placeholder={'Choose a team'}

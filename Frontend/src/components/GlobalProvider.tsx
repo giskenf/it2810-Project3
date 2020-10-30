@@ -1,11 +1,8 @@
-import React, {useState, createContext, useContext, ReactNode, useMemo} from 'react';
+import React, {useState, createContext, useMemo} from 'react';
 
 export const GlobalContext = createContext<any>(1)
 
-
 export const GlobalProvider = (props: any) =>{
-
-
 
     const [selectedPage,setSelectedPage] = useState(1);
     const [isDisabled, setIsDisabled] = useState(true);

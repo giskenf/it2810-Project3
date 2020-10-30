@@ -3,7 +3,6 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles,
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -14,8 +13,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
-import { spacing } from "@material-ui/system";
-import rootReducer from "../store/reducers";
 import axios from "axios";
 
 const styles = (theme: Theme) =>
@@ -32,12 +29,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string;
-  children: React.ReactNode;
-  onClose: () => void;
-}
-
+//Metoder for inn å style komponent fra Material-UI
 const DialogTitle = withStyles(styles)((props: any) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -69,9 +61,10 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
+//Pop-up cards med informasjon om enkeltspillere
+//Komponenter hetet fra Material-UI
 export function PopUp(props: any) {
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -82,10 +75,8 @@ export function PopUp(props: any) {
   const [votes, setVotes] = useState<number>(props.votes);
   useEffect(() => {
     const changeVote = async () => {
-
       const votesAndNumber = votes + number;
       setVotes(votesAndNumber);
-
       const data = await axios.put(
         "http://localhost:8000/players/" + props.id + "?votes=" + votesAndNumber
       );

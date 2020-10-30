@@ -8,11 +8,9 @@ import { Dispatch } from "redux";
 import axios from "axios";
 
 export const GetPlayers = (
-
   name: string,
   team: string,
   sort: string,
-  //hasSearched?: boolean,
   order: number,
   page: number
 

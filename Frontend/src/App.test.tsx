@@ -4,13 +4,10 @@ import App from '../src/App';
 import {HeaderComponent} from "./components/HeaderComponent/HeaderComponent";
 import {Provider} from 'react-redux';
 import store from '../src/store/store';
-import {FooterComponent} from "./components/FooterComponent/FooterComponent";
 import {SearchBarComponent} from "./components/SearchBarComponent/SearchComponent";
-import {DropDownComponent} from "./components/DropDownComponent/DropDownComponent";
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure } from 'enzyme';
-
 
 Enzyme.configure({adapter: new Adapter()});
 
