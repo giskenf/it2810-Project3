@@ -139,7 +139,7 @@ export function PopUp(props: any) {
             Upvote
           </Button>
           <Button autoFocus onClick={() => setNumber(-1)} color="primary">
-            Upvote
+            Downvote
           </Button>
         </DialogActions>
       </Dialog>
