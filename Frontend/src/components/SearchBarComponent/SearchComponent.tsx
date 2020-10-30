@@ -54,7 +54,11 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     }
   };
   //metode for å hente nye spillere. Kalles av søk-knappen og useEffect metoden
-  const handleSubmit = (search:boolean) => {
+  const handleSubmit = (search:boolean,buttonnr:number) => {
+      //Sjekker om handleSubmit blir kalt på av Search knappen
+      if(buttonnr===1){
+          pageProvider.setSelectedPage(1);
+      }
       //Sjekker om man tidligere har søkt, slik at ikke spillere hentes før brukeren søker
       if(search) {
         setSearch(true)
@@ -63,6 +67,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
         isDisabledProvider.setIsDisabled(false);
         dispatch(GetPlayers(playerName, team, sort, order, pageProvider.selectedPage));
     }
+
   };
   //Metode som endrer rekkefølgen spillerene presenteres. Kalles på av sort-knappen.
   const changeOrder = () => {
@@ -75,7 +80,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
   };
 
   //Metode som henter nye spillere når bruker bytter side
-  useEffect(() => handleSubmit(search), [pageProvider.selectedPage]);
+  useEffect(() => handleSubmit(search,0), [pageProvider.selectedPage]);
 
   return (
     <>
@@ -105,7 +110,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
           </SortButton>
           <SearchButton
               onClick={() => {
-                  handleSubmit(true);
+                  handleSubmit(true,1);
               }}
           >
               Search
