@@ -50,7 +50,6 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
       setIndex1(1);
       setSort("name");
     }
-
     //sortere på antall mål
     else if (Sort == "goalsScored") {
       setIndex1(0);
@@ -193,7 +192,12 @@ const SortButton = styled(Button)`
 `;
 const ButtonContainer = styled.div<{}>`
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items:center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
+
