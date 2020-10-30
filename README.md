@@ -49,17 +49,36 @@ komponeneter da det er mye releveant dokumentasjon tilgjengelig og vi syntes det
 og enklere å forstå. 
 
 
+Sentralt i vår nettside er SearchComponent. Her ligger mye av logikken for å interagere med databasen, som
+søk, filtrering og sortering. Under ser vi et tabell av de ulike metodene i komponenten.
+
+TABELL MED METODER I SEARCHCOMPONENT
+
+Material UI
+- Popup
+- Pagination 
+- Select(DropDownComponent)
+
+
+
+FooterComponent:
+- Count context 
+
 ###Search component 
 
 ####Styling
 
+- Styled Components
+
 ###Teknologier
 
-####State management(context, redux, OG MObX)
+- State management(context, redux, OG MObX)
 
 ##Testing
 
 ##Bruk av git
+
+
 
 ##Pakker brukt
 
