@@ -13,15 +13,6 @@ describe('Searchbar', () => {
             .click();
     });
 
-    it('Shows all players after clicking search button', () => {
-        cy.contains('Search')
-            .click()
-            .get('.pagination').get('>').click({ multiple: true })
-            .get('.playersList')
-            //.contains('Marcus Rashford')
-            .should('not.have.value', 'Ronaldo');
-    });
-
 //Test search functionality
 
     it('Correct player appears after search', () => {

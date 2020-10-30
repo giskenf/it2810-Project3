@@ -4,7 +4,7 @@ import App from '../src/App';
 import {HeaderComponent} from "./components/HeaderComponent/HeaderComponent";
 import {Provider} from 'react-redux';
 import store from '../src/store/store';
-import {FrontPageComponent} from "./components/FrontPageComponent/FrontPageComponent";
+import {FooterComponent} from "./components/FooterComponent/FooterComponent";
 import {SearchBarComponent} from "./components/SearchBarComponent/SearchComponent";
 import {DropDownComponent} from "./components/DropDownComponent/DropDownComponent";
 import Enzyme from 'enzyme'
@@ -29,6 +29,13 @@ test('Test list of players', () => {
   const search = shallow(<Provider store={store}>(<SearchBarComponent /></Provider>);
   expect(search.find('.playersList'));
 });
+
+test('Render search bar component', () => {
+  const searchBar = shallow(<Provider store={store}>(<SearchBarComponent /></Provider>);
+  expect(searchBar).toBeTruthy();
+});
+
+
 
 
 
