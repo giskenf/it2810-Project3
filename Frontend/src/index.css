@@ -11,13 +11,17 @@ body {
 .react-select {
   padding: 4px;
   width: 15%;
+  min-width: 200px;
   font-size: small;
 
 }
+
 .react-select-container {
   border: none;
   border-radius: 0;
   padding: 0;
+  width: 250px;
+  align-items: center;
 }
 
 
@@ -30,6 +34,8 @@ body {
   border-width: 2px !important;
   opacity: 1 !important;
   border-color: #3D195B !important;
+  min-width: 100px !important;
+  align-self: center;
 }
 
 .react-select__value-container {

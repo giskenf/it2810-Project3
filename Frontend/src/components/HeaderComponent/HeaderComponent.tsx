@@ -18,14 +18,17 @@ const HeaderContainer = styled.div<{}>`
   background-color: #3D195B;
   color: white;
   font-size: 32px;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
   padding: 30px 0 30px 0;
+  
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 const HeaderTextContainer = styled.div<{}>`
   width: 75%;
-  margin: 40px 0;
+  margin: 40px 150px;
 `;
 
 const LogoContainer = styled.img<{}>`
