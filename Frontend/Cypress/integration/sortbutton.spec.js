@@ -17,6 +17,8 @@ describe('Drop Down Bar', () => {
             .contains('Sokratis Papastathopoulos')
         cy.contains('Sort by name')
             .click()
+        cy.contains('Search')
+            .click()
             .get('.playersList')
             .get('.popupButton')
             .first()

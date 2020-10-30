@@ -81,7 +81,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     <>
       <ButtonContainer>
           <DropDownComponent changeTeam={setTeam} />
-          <Input
+          <Input className="searchInput"
             id="searchInput"
             type="text"
             placeholder="Search for your favorite player!"
