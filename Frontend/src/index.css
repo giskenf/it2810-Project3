@@ -8,8 +8,50 @@ body {
   margin: 0;
 }
 
-.select {
+.react-select {
   padding: 4px;
   width: 15%;
   font-size: small;
 }
+.react-select-container {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+
+.react-select__indicator-separator {
+  display: none;
+}
+
+.react-select__control {
+  border-radius: 0 !important;
+  border-width: 2px !important;
+  opacity: 1 !important;
+  border-color: #3D195B !important;
+}
+
+.react-select__value-container {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.react-select__indicator {
+  border: none;
+  border-radius: 0;
+  opacity: 1;
+}
+
+.react-select__menu {
+  border: none;
+  border-radius: 0 !important;
+  opacity: 1;
+}
+
+/*Added empty css-names so that Cypress test works with styled components*/
+.searchInput {}
+.playersList {}
+.popUp {}
+
