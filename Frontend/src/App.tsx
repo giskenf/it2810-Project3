@@ -11,7 +11,7 @@ import Select from "react-select";
 import {GlobalProvider} from "./components/GlobalProvider";
 const { Provider } = require('react-redux');
 
-function App() {
+export function App() {
 
     return (
     <>
