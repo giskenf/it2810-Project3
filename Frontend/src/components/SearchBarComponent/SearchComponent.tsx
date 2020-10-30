@@ -85,6 +85,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
     console.log(pageProvider.selectedPage)
     return (
         <>
+            <ButtonContainer>
             <Input id="searchInput" type="text" placeholder="Search for your favorite player!" onChange={handleChange}/>
             <Button onClick={() =>{handleSubmit(true,sort,1)}}>Search</Button>
             <DropDownComponent changeTeam={setTeam} />
@@ -93,6 +94,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
             <SortButton index={index2} onClick={()=>{
                 handleSubmit(false,"goalsScored",3)}}>Sort by goals scored</SortButton>
             <SortButton index={order} onClick={()=>changeOrder()}>Sort ascending</SortButton>
+            </ButtonContainer>
             <SearchContainer>
                         {playerState.player && (
                                     <ul style={{listStyleType: "none"}}>
@@ -104,6 +106,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                                             return (
 
                                                 <PopUp key={player._id}
+                                                       id={player._id}
                                                        name={player?.name}
                                                        goals_conceded={player?.goals_scored}
                                                        goals_scored={player?.goals_scored}
@@ -113,6 +116,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (props: searchBarPro
                                                        team={player?.team}
                                                        red_cards={player?.red_cards}
                                                        yellow_cards={player?.yellow_cards}
+                                                       vote={player.votes}
                                                 />
                                             )
                                         })}
@@ -165,8 +169,12 @@ const SortButton = styled(Button)`
 `;
 const ButtonContainer = styled.div<{}>`
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items:center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 

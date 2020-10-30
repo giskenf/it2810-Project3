@@ -82,14 +82,10 @@ export function PopUp(props: any) {
   const [votes, setVotes] = useState<number>(props.votes);
   useEffect(() => {
     const changeVote = async () => {
-      console.log(props.id);
+
       const votesAndNumber = votes + number;
       setVotes(votesAndNumber);
 
-      console.log(votesAndNumber);
-      console.log(number);
-      console.log(votes);
-      console.log(typeof votes);
       const data = await axios.put(
         "http://localhost:8000/players/" + props.id + "?votes=" + votesAndNumber
       );
