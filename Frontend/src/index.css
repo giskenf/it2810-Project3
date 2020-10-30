@@ -12,6 +12,7 @@ body {
   padding: 4px;
   width: 15%;
   font-size: small;
+
 }
 .react-select-container {
   border: none;
@@ -54,4 +55,7 @@ body {
 .searchInput {}
 .playersList {}
 .popUp {}
+.pagination {}
+.popUpButton {}
+.MuiSvgIcon-root MuiPaginationItem-icon {}
 

@@ -84,7 +84,8 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
   console.log(pageProvider.selectedPage);
   return (
     <>
-      <Input
+      <DropDownComponent changeTeam={setTeam} />
+      <Input className="searchInput"
         id="searchInput"
         type="text"
         placeholder="Search for your favorite player!"
@@ -97,7 +98,6 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
       >
         Search
       </Button>
-      <DropDownComponent changeTeam={setTeam} />
       <SortButton
         index={index1}
         onClick={() => {
@@ -119,7 +119,7 @@ export const SearchBarComponent: React.FC<searchBarProps> = (
       </SortButton>
       <SearchContainer>
         {playerState.player && (
-          <ul style={{ listStyleType: "none" }}>
+          <ul className="playersList" style={{ listStyleType: "none" }}>
             {playerState?.player?.map((player) => {
               if (playerState.count != null) {
                 numberOfPageProvider.setNumberOfPages(

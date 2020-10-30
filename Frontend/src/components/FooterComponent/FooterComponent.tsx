@@ -30,7 +30,7 @@ export const FooterComponent: React.FC = () => {
         <>
             <FooterContainer>
             <div className={classes.root}>{pageProvider.selectedPage}
-                <Pagination
+                <Pagination className={"pagination"}
                     count={numberOfPageProvider.numberOfPages}
                     color={"primary"}
                     page={pageProvider.selectedPage}
