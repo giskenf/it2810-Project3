@@ -21,12 +21,12 @@ Etter å ha klonet repoet:
 
 ## Hvordan interagere med applikasjonen
 
-#####Search-knappen:
+##### Search-knappen:
 
 Denne knappen trykkes hver gang en bruker vil hente data. Man kan da velge hvilke filtre og/eller sorteringer som 
 skal gjelde. Dersom den trykkes uten filtre og/eller sortering, hentes alle spillerne i databasen. 
 
-#####Sorteringsknapper:
+##### Sorteringsknapper:
 	- Sort by name
 	- Sort by goals
 	- Sort ascending
@@ -34,7 +34,7 @@ skal gjelde. Dersom den trykkes uten filtre og/eller sortering, hentes alle spil
 Disse knappene brukes for å bestemme hvilken rekkefølge datasettet skal presenteres. Knappene trykkes, før brukeren
 så trykker på Search-knappen for å hente data.
 
-#####Nedtrekksmenyen:
+##### Nedtrekksmenyen:
 
 Verdien i denne nedtrekksmenyen filtrerer datasettet ved søk. Brukeren velger et lag(eller feltet All teams for å velge
 alle lag). Deretter trykker brukeren på Search-knappen for å hente data.
@@ -73,18 +73,18 @@ Sentralt i vår nettside er SearchComponent. Her ligger mye av logikken for å i
 søk, filtrering og sortering. Under ser vi et tabell av de ulike metodene i komponenten.
 
 
-####Styling
+#### Styling
 
 - Styled Components
 For å gjøre filhieriakiet enklere har vi tatt i bruk tredjepartsbiblioteket **styled-components** for å srive CSS. 
 **styled-components** gjør det mulig å skrive CSS-code direkte inn i typeScript-filene, slik at man unngår
 å måtte lage separate CSS-filer. 
 
-###Teknologier
+### Teknologier
 
 
 
-####State management
+#### State management
 
 **Redux** ble benyttet til state managament i applikasjonen. Hvor prinsippet er å ha en store for lagring av tilstander. 
 Dette gjør at en kan flytte tilstander ut av komponenter, til en egen «enhet». 
@@ -101,7 +101,7 @@ Vi så **context** som nyttig her, da vi hadde behov for å sende variabler og f
 
 
 
-####Material UI
+#### Material UI
 Vi valgte å benytte Material UI til følgende komponenter:
 - Popup
 - Pagination
@@ -112,21 +112,21 @@ en popup med mer informasjon. Pagination brukes i FooterComponent for å ha en e
 og Select brukes i DropDownComponent for å hente frem en dropdown-meny for valg av lag. 
 
 
-##Testing
+## Testing
 
-###Enhetstesting
+### Enhetstesting
 For systematisk enhetstesting har vi tatt i bruk Jest og Enzyme. Vi valge å teste enhetene ganske overordnet og brukte 
 Enzyme med Shallow-rendering for å child-komponenter. Alle testene kjøres i App.test.tsx. De tester at komponentene 
 rendrer, samt at enekltkomponenter eksisterer. Grunnen til at vi valgte Jest var at vi hadde erfaring fra det fra 
 prosjekter. Vi valgte å ikke ta i bruk snapshot-testing, da SVG-elementet vi hadde i applikasjonen gjorde at snapshot-
 testene failet. 
 
-####Hvordan kjøre enhetstestene
+#### Hvordan kjøre enhetstestene
 Start alle testene:
 npm test
 a
 
-###End-to-End testing
+### End-to-End testing
 
 For end-to-end testing har vi tatt i bruk Cypress. Dette var noe vi ikke hadde gjort før, men vi valgte Cypress da den 
 hadde en god dokumentasjon som var enkel å forstå. Cypress visualiserer godt, slik at det erneklt å følge med på hva 
@@ -138,15 +138,15 @@ ulike knapper. Testing av DropDownComponent og pagination-komponenten i FooterCo
 da disse komponente var 3.parts komponenter. For å teste i Cypress burde man ha innblikk i hele oppbygningen av hver 
 komponent. Derfor er testingen av disse komponentene noe mangelfull. 
 
-####Hvordan kjøre e2e-testene
+#### Hvordan kjøre e2e-testene
 npx cypress open
 
 Etter en stund vil et vindu åpne seg, og man trykker på "Run all specs". 
 
 
 
-##Pakker brukt
-#####Frontend pakker:
+## Pakker brukt
+##### Frontend pakker:
 
 - Redux 
 Brukes til state management
@@ -166,7 +166,7 @@ Brukes til enhetstesting
 Gir mulighet for shallow-rendering
 
   
-#####Backend pakker:
+##### Backend pakker:
 - Cors
 Brukes til tilgangsstyring
 - Dotenv
@@ -176,7 +176,7 @@ Brukes til routing, sette opp REST API
 - Mongoose
 Modellering av objekter 
 
-##Kilder:
+## Kilder:
 - https://material-ui.com/components/dialogs/?fbclid=IwAR2fmQBEEYrmZpiUKCfcBlgwqtFC1W7W4eLNzGyMeNaIp0W4hpCkx5C5mZQ
 - https://material-ui.com/components/pagination/?fbclid=IwAR2RhLkItCoDwZBLa_oinbhSJa4jN02mi4dP54Ci1NfWhX5jDeCSSffpYik
 - https://github.com/daryanka/typescript-with-redux?fbclid=IwAR3WXPzX7TUaOHkMum9ZROeNJzYG0FJsavBqa3kpMhXgLqbMSMogBgyJ27c
